@@ -1,29 +1,29 @@
 html {
-	font-family: "Roboto", Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
 }
 
 html,
 body {
-	margin:0;
-	padding:0;
+  margin:0;
+  padding:0;
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 /* modules */
 .box-content {
-	margin: 0 auto;
-	padding: 24px;
-	max-width: 100%;
-	width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+  max-width: 100%;
+  width: 100%;
 }
 
 /* decoration */
 .mui-shadow {
-	box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px,
-				rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px,
+        rgba(0, 0, 0, 0.117647) 0px 1px 4px;
 }
 
 /* laptops @media */
@@ -36,8 +36,8 @@ a {
 /* laptops and up @media */
 @media screen
   and (min-width: 1200px) {
-  	.box-content {
-		max-width: 45%;
-		width: 45%;
-	}
+    .box-content {
+    max-width: 45%;
+    width: 45%;
+  }
 }
