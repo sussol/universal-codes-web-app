@@ -15,7 +15,7 @@ const BackButton = () => ({
       <RaisedButton
         onClick={this.handleBackClick}
         label="Back to Results"
-        secondary={true}
+        secondary
         style={style}
       />
     );
