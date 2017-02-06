@@ -12,17 +12,25 @@ import ApiRoute from './routes/api';
 import { globalStyles } from './globalStyles.js';
 import LegendRoute from './routes/legend';
 import ResultRoute from './routes/result';
-import Search from './routes/search/Search.jsx';
-
 
 // Apply app wide styles here (http://www.material-ui.com/#/customization/themes)
 const muiTheme = getMuiTheme(globalStyles);
 
-// routesConfig
+// react-router routes main config
 const routesConfig = {
   path: '/',
+  // required - always load
   component: App,
-  indexRoute: { component: Search },
+  // load when on index only, on-demand
+  getIndexRoute(partialNextState, callback) {
+    require.ensure([], (require) => {
+      callback(null, {
+        component: require('./components/Search.jsx').default,
+      });
+    });
+  },
+  // loaded later on-demand
+  // https://github.com/ReactTraining/react-router/blob/master/docs/guides/DynamicRouting.md#dynamic-routing
   childRoutes: [
     AboutRoute,
     All,
