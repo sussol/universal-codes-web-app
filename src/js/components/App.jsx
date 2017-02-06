@@ -18,8 +18,6 @@ const App = (props) => (
     <div>@DEBUG:
       <Link to={'/metaformin/me1000'}>I link to  yet another result, w00t!</Link>
     </div>
-    <br />
-    <div><Link to={'/all'}>SHOW ALL RESULTS</Link></div>
     {/* end @debug */}
 
     {props.children ?
@@ -27,6 +25,10 @@ const App = (props) => (
       {props.children}
     </div> :
     null}
+
+    {/* show all results */}
+    <br />
+    <div><Link to={'/all'}>SHOW ALL RESULTS</Link></div>
   </div>
 );
 
