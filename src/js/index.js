@@ -7,11 +7,13 @@ import { Router, browserHistory } from 'react-router';
 
 import AboutRoute from './routes/about';
 import All from './routes/all';
+import App from './components/App.jsx';
 import ApiRoute from './routes/api';
 import { globalStyles } from './globalStyles.js';
 import LegendRoute from './routes/legend';
 import ResultRoute from './routes/result';
-import App from './components/App.jsx';
+import Search from './routes/search/Search.jsx';
+
 
 // Apply app wide styles here (http://www.material-ui.com/#/customization/themes)
 const muiTheme = getMuiTheme(globalStyles);
@@ -20,7 +22,7 @@ const muiTheme = getMuiTheme(globalStyles);
 const routesConfig = {
   path: '/',
   component: App,
-  // indexRoute: {component: Home},
+  indexRoute: { component: Search },
   childRoutes: [
     AboutRoute,
     All,
