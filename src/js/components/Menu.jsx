@@ -9,6 +9,9 @@ const Menu = (props) => (
     open={props.open}
     onRequestChange={(open) => props.drawerChange(open)}
   >
+    <Link to={'/'}>
+      <MenuItem onTouchTap={props.close} primaryText="Search" />
+    </Link>
     <Link to={'/about'}>
       <MenuItem onTouchTap={props.close} primaryText="About" />
     </Link>
