@@ -6,6 +6,7 @@ import { Router, browserHistory } from 'react-router';
 import AboutRoute from './routes/about';
 import ApiRoute from './routes/api';
 import LegendRoute from './routes/legend';
+import ResultRoute from './routes/result';
 import App from './components/App.jsx';
 
 // routesConfig
@@ -17,6 +18,7 @@ const routesConfig = {
     AboutRoute,
     ApiRoute,
     LegendRoute,
+    ResultRoute,
   ],
 };
 
