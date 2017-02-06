@@ -6,6 +6,7 @@ import { render } from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 
 import AboutRoute from './routes/about';
+import All from './routes/all';
 import ApiRoute from './routes/api';
 import { globalStyles } from './globalStyles.js';
 import LegendRoute from './routes/legend';
@@ -22,6 +23,7 @@ const routesConfig = {
   // indexRoute: {component: Home},
   childRoutes: [
     AboutRoute,
+    All,
     ApiRoute,
     LegendRoute,
     ResultRoute,
