@@ -1,8 +1,9 @@
-module.exports = {
+import { Result } from './Result.jsx';
+
+// @todo if routing for results is implemented
+// we need a parent Route to contain this path
+// e.g. search/amox/500sdfsdf3
+export const ResultRoute = {
   path: '/:name/:code',
-  getComponent(nextState, cb) {
-    require.ensure([], (require) => {
-      cb(null, require('./Result.jsx').default);
-    });
-  },
+  component: Result,
 };

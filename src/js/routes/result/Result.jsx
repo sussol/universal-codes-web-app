@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 
-import BackButton from '../../components/BackButton.jsx';
+// import BackButton from '../../components/BackButton.jsx';
 
-const Result = (props) => (
-    <div>
+export class Result extends PureComponent {
+  render() {
+    return (
       <div>
-        <b>Drug Name:</b> {props.params.name}<br />
-        <b>Drug Code:</b> {props.params.code}
+        <div>
+          <b>Drug Name:</b> {this.props.params.name}<br />
+          <b>Drug Code:</b> {this.props.params.code}
+        </div>
+        {/* <BackButton {...props} /> */}
       </div>
-      <br />
-      <BackButton {...props} />
-    </div>
-);
+    );
+  }
+}
 
 Result.propTypes = {
   params: React.PropTypes.object,
 };
-
-export default Result;
