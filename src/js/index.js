@@ -5,9 +5,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { render } from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 
-import All from './routes/all';
-import App from './components/App.jsx';
 import ResultRoute from './routes/result';
+import { App } from './components/App.jsx';
 import { AboutRoute } from './routes/about';
 import { ApiRoute } from './routes/api';
 import { globalStyles } from './globalStyles.js';
@@ -27,7 +26,6 @@ const routesConfig = {
   // https://github.com/ReactTraining/react-router/blob/master/docs/guides/DynamicRouting.md#dynamic-routing
   childRoutes: [
     AboutRoute,
-    All,
     ApiRoute,
     LegendRoute,
     ResultRoute,
