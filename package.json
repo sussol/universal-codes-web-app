@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./ --ext=\".js,.jsx\" --fix",
     "webpack-server": "webpack-dev-server --hot --progress --colors",
     "web-server": "http-server -p 3000 .",
     "start": "npm run webpack-server & npm run web-server",
