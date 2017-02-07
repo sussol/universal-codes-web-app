@@ -1,6 +1,8 @@
 /* global __dirname: true */
-const webpack = require('webpack');
-const PROD = process.env.NODE_ENV === 'production';
+/* eslint-disable no-var */
+/* eslint-disable prefer-template */
+var webpack = require('webpack');
+var PROD = process.env.NODE_ENV === 'production';
 
 // getEntrySources gets sources for webpack entry paths, by environment
 function getEntrySources(sources) {
@@ -16,7 +18,7 @@ module.exports = {
   entry: getEntrySources(['babel-polyfill', './src/js/index.js']),
   output: {
     publicPath: PROD ? './build/' : 'http://localhost:8080/build/',
-    path: __dirname + '/build', // eslint-disable-line prefer-template
+    path: __dirname + '/build',
     filename: 'bundle.js',
   },
   devtool: PROD ? 'cheap-module-source-map' : 'eval',
