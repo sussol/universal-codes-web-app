@@ -5,12 +5,12 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { render } from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 
-import ResultRoute from './routes/result';
-import { App } from './components/App.jsx';
 import { AboutRoute } from './routes/about';
 import { ApiRoute } from './routes/api';
+import { App } from './components/App.jsx';
 import { globalStyles } from './globalStyles.js';
 import { LegendRoute } from './routes/legend';
+import { ResultRoute } from './routes/result';
 import { SearchBar } from './components/SearchBar.jsx';
 
 // Apply app wide styles here (http://www.material-ui.com/#/customization/themes)
