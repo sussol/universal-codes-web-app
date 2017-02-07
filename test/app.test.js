@@ -1,7 +1,5 @@
 /* global test,expect true */
 
-// REACT COMPONENTS RENDER
-
 /**
 * @delete-me
 * And we begin with a proper, failing test ;-)
