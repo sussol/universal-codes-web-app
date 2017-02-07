@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 
-import AboutContent from '../../../static/about.html';
-
-const About = () => (
-	<div>
-		<div dangerouslySetInnerHTML={{ __html: AboutContent }} />
-	</div>
-);
-
-export default About;
+export class About extends PureComponent {
+  render() {
+    return (
+      <div>
+        <h2>About this project</h2>
+        <div>All about the stuff.</div>
+      </div>
+    );
+  }
+}

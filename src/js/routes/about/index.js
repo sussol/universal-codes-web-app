@@ -1,8 +1,6 @@
-module.exports = {
+import { About } from './About.jsx';
+
+export const AboutRoute = {
   path: '/about',
-  getComponent(nextState, cb) {
-    require.ensure([], (require) => {
-      cb(null, require('./About.jsx').default);
-    });
-  },
+  component: About,
 };

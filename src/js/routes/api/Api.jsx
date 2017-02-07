@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 
-import ApiContent from '../../../static/api.html';
-
-const Api = () => (
-	<div>
-		<div dangerouslySetInnerHTML={{ __html: ApiContent }} />
-	</div>
-);
-
-export default Api;
+export class Api extends PureComponent {
+  render() {
+    return (
+      <div>
+        <div>
+          <h2>API Docs</h2>
+          <p>Auto-generated documentation from some source.</p>
+        </div>
+      </div>
+    );
+  }
+}
