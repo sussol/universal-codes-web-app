@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import AppBar from 'material-ui/AppBar';
 
-import Menu from './Menu.jsx';
+import { Menu } from './Menu.jsx';
 
-class Header extends Component {
+// can use PureComponent here since given same props, state
+// the result is the same
+export class Header extends PureComponent {
   constructor(props) {
     super(props);
     // initialise state
@@ -38,5 +40,3 @@ class Header extends Component {
     );
   }
 }
-
-export default Header;
