@@ -1,51 +1,40 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { PureComponent } from 'react';
+import { SussolReactTable } from 'sussol-react-table';
 
-/**
-* @delete-me: REPLACE WITH Blueprint.js TABLE
-* debug only
-*/
-export const Results = () => (
-  <div>
-    {/* @delete-me */}
-    @DEBUG RESULTS TABLE:
-    <table>
-      <tbody>
-        <tr>
-          <th>Name</th>
-          <th>Universal Code</th>
-        </tr>
-        <tr>
-            <td>
-              <Link to={'/amoxicillin/am500'}>
-                amoxicillin
-              </Link>
-            </td>
-            <td>
-              am500
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <Link to={'/hydrochlorothiazide/hy50'}>
-                hydrochlorothiazide
-              </Link>
-            </td>
-            <td>
-              hy50
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <Link to={'/metaformin/me1000'}>
-                metaformin
-              </Link>
-            </td>
-            <td>
-              me1000
-            </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-);
+const columns = [
+  {
+    key: 'name',
+    title: 'Name',
+    sortable: true,
+  },
+  {
+    key: 'code',
+    title: 'Code',
+    sortable: true,
+  },
+  {
+    key: 'group',
+    title: 'Editable Column',
+    editable: true,
+  },
+];
+
+// @todo fetch proper data
+const data = [];
+for (let i = 0; i < 100; i++) {
+  data.push({ code: `code${i}`, name: `name${i}`, group: `group${i % 2}` });
+}
+
+export class ResultsTable extends PureComponent {
+  render() {
+    return (
+      <div>
+        <h2>Results</h2>
+        <SussolReactTable
+          columns={columns}
+          tableData={data}
+        />
+      </div>
+    );
+  }
+}

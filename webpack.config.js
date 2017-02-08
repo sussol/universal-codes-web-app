@@ -41,17 +41,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: [
-          'css-loader',
-        ],
+        loader: 'style-loader!css-loader',
       },
       {
-        test: /\.(png|jpg|jpeg|gif|woff|svg)$/,
+        test: /\.(png|jpg|jpeg|gif|svg|woff|eot|ttf)$/,
         loader: 'file-loader',
-      },
-      {
-        test: /\.html$/,
-        loader: 'html',
       },
     ],
   },
