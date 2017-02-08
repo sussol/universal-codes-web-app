@@ -11,7 +11,13 @@ import { App } from './components/App.jsx';
 import { globalStyles } from './globalStyles.js';
 import { LegendRoute } from './routes/legend';
 import { ResultRoute } from './routes/result';
-import { SearchBar } from './components/SearchBar.jsx';
+import { IndexPage } from './components/IndexPage.jsx';
+
+// load styles into bundle
+import '../css/custom.css';
+import 'normalize.css/normalize.css';
+import '@blueprintjs/core/dist/blueprint.css';
+import '@blueprintjs/table/dist/table.css';
 
 // Apply app wide styles here (http://www.material-ui.com/#/customization/themes)
 const muiTheme = getMuiTheme(globalStyles);
@@ -21,7 +27,7 @@ const routesConfig = {
   path: '/',
   // required - always load
   component: App,
-  indexRoute: { component: SearchBar },
+  indexRoute: { component: IndexPage },
   // loaded later on-demand
   // https://github.com/ReactTraining/react-router/blob/master/docs/guides/DynamicRouting.md#dynamic-routing
   childRoutes: [
