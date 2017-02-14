@@ -32,7 +32,7 @@ export class ResultsTable extends PureComponent {
         <h2>Results</h2>
         <SussolReactTable
           columns={columns}
-          tableData={data}
+          tableData={this.props.data}
         />
       </div>
     );
