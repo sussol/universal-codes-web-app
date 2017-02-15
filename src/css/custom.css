@@ -8,13 +8,6 @@ body {
   padding:0;
 }
 
-<<<<<<< Updated upstream
-a {
-  text-decoration: none;
-}
-
-/* modules */
-=======
 input {
   width: 100%;
   padding: 8px 8px 8px 2px;
@@ -27,7 +20,6 @@ input:focus {
 }
 
 /* @module */
->>>>>>> Stashed changes
 .box-content {
   margin: 0 auto;
   padding: 24px;
