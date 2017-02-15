@@ -32,16 +32,11 @@ export class Header extends PureComponent {
     return (
       <div>
         <AppBar
-<<<<<<< Updated upstream
-          title="Universal Drug Codes"
-          onLeftIconButtonTouchTap={this.handleToggle}
-=======
           className="header"
           onLeftIconButtonTouchTap={this.handleToggle}
           style={styles}
           title="Universal Drug Codes"
           titleStyle={{ color: 'rgb(242, 101, 50)' }}
->>>>>>> Stashed changes
         />
         {/* menu drawer to toggle */}
         <Menu
