@@ -3,6 +3,11 @@ import AppBar from 'material-ui/AppBar';
 
 import { Menu } from './Menu.jsx';
 
+const styles = {
+  backgroundColor: '#FFF',
+  borderBottom: '2px solid rgba(242, 101, 50, 0.55)',
+};
+
 // can use PureComponent here since given same props, state
 // the result is the same
 export class Header extends PureComponent {
@@ -27,8 +32,16 @@ export class Header extends PureComponent {
     return (
       <div>
         <AppBar
+<<<<<<< Updated upstream
           title="Universal Drug Codes"
           onLeftIconButtonTouchTap={this.handleToggle}
+=======
+          className="header"
+          onLeftIconButtonTouchTap={this.handleToggle}
+          style={styles}
+          title="Universal Drug Codes"
+          titleStyle={{ color: 'rgb(242, 101, 50)' }}
+>>>>>>> Stashed changes
         />
         {/* menu drawer to toggle */}
         <Menu
