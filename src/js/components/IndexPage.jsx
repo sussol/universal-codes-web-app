@@ -11,7 +11,7 @@ export class IndexPage extends PureComponent {
 
   // @todo remove forced condition
   // respond to search input
-  handleSearchDone(data, searchTerm) {
+  handleSearchChange(data, searchTerm) {
     if (!data.length) return this.setState({ showResults: false });
     return this.setState({ showResults: true, resultData: data, searchTerm });
   }
@@ -19,7 +19,11 @@ export class IndexPage extends PureComponent {
   render(props) {
     return (
       <div>
-        <SearchBar searchDone={(data, searchTerm) => this.handleSearchDone(data, searchTerm)} />
+        <SearchBar
+          onSearchChange={(data, searchTerm) => (
+            this.handleSearchChange(data, searchTerm)
+          )}
+        />
         {/* render results table */}
         {this.state.showResults && <ResultsTable
           {...props}
