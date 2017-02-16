@@ -11,16 +11,25 @@ export class IndexPage extends PureComponent {
 
   // @todo remove forced condition
   // respond to search input
-  handleSubmit() {
-    return this.setState({ showResults: true });
+  handleSearchChange(data, searchTerm) {
+    if (!data.length) return this.setState({ showResults: false });
+    return this.setState({ showResults: true, resultData: data, searchTerm });
   }
 
   render(props) {
     return (
       <div>
-        <SearchBar handleSubmit={() => this.handleSubmit()} />
+        <SearchBar
+          onSearchChange={(data, searchTerm) => (
+            this.handleSearchChange(data, searchTerm)
+          )}
+        />
         {/* render results table */}
-        { this.state.showResults && <ResultsTable {...props} /> }
+        {this.state.showResults && <ResultsTable
+          {...props}
+          data={this.state.resultData}
+          searchTerm={this.state.searchTerm}
+        />}
       </div>
     );
   }
