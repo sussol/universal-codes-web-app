@@ -27,8 +27,9 @@ export class Header extends PureComponent {
     return (
       <div>
         <AppBar
-          title="Universal Drug Codes"
           onLeftIconButtonTouchTap={this.handleToggle}
+          title="Universal Drug Codes"
+          style={{ backgroundColor: '#F26532' }}
         />
         {/* menu drawer to toggle */}
         <Menu
