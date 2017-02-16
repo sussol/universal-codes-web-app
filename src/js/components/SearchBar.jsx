@@ -65,7 +65,7 @@ export class SearchBar extends PureComponent {
     // @todo will need to search on more criteria + fuzzy
     return fetch(`${PROTOCOL}${SERVER_HOST}/search/${value.toLowerCase()}`)
       .then((res) => res.json())
-      .then((json) => this.props.searchDone(json, value));
+      .then((json) => this.props.onSearchChange(json, value));
   }
 
   render() {
