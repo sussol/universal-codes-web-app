@@ -8,22 +8,7 @@ body {
   padding:0;
 }
 
-a {
-  text-decoration: none;
-}
-
-input {
-  width: 100%;
-  padding: 8px 8px 8px 2px;
-  border: none;
-  border-bottom: 2px solid #DDD;
-}
-
-input:focus {
-  outline: none;
-}
-
-/* modules */
+/* @module */
 .box-content {
   margin: 0 auto;
   padding: 24px;
@@ -31,7 +16,7 @@ input:focus {
   width: 100%;
 }
 
-/* decoration */
+/* @decor */
 .mui-shadow {
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px,
         rgba(0, 0, 0, 0.117647) 0px 1px 4px;
@@ -51,4 +36,13 @@ input:focus {
     max-width: 45%;
     width: 45%;
   }
+}
+
+/* @override */
+a {
+  text-decoration: none !important;
+}
+
+.header svg {
+  fill: rgba(242, 101, 50, 0.55) !important;
 }
