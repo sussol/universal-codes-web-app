@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import TextField from 'material-ui/TextField';
 
-import { SERVER_HOST, PROTOCOL } from '../settings';
+import { FUZZY_SEARCH_URL } from '../settings';
 
 /**
 * Debounce active update of table data
@@ -63,7 +63,7 @@ export class SearchBar extends PureComponent {
 
     // hit API for term
     // @todo will need to search on more criteria + fuzzy
-    return fetch(`${PROTOCOL}${SERVER_HOST}/search/${value.toLowerCase()}`)
+    return fetch(`${FUZZY_SEARCH_URL}${value.toLowerCase()}`)
       .then((res) => res.json())
       .then((json) => this.props.onSearchChange(json, value));
   }
