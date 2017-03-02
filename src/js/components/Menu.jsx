@@ -13,13 +13,16 @@ export class Menu extends PureComponent {
         open={this.props.open}
         onRequestChange={(open) => this.props.drawerChange(open)}
       >
-        <Link to={'about'}>
+        <Link to="/">
+          <MenuItem onTouchTap={this.props.close} primaryText="Search" />
+        </Link>
+        <Link to="about">
           <MenuItem onTouchTap={this.props.close} primaryText="About" />
         </Link>
-        <Link to={'legend'}>
+        <Link to="legend">
           <MenuItem onTouchTap={this.props.close} primaryText="Legend" />
         </Link>
-        <Link to={'api'}>
+        <Link to="api">
           <MenuItem onTouchTap={this.props.close} primaryText="API" />
         </Link>
       </Drawer>
