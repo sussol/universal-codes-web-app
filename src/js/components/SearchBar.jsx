@@ -73,12 +73,12 @@ export class SearchBar extends PureComponent {
       <div>
         {/* search field */}
         <TextField
+          className="search-bar"
           floatingLabelStyle={{ color: 'rgb(242, 101, 50)' }}
           floatingLabelText="Search by generic drug name or universal code"
           id="drug-code-autocomplete"
           // accommodate slower typists
           onChange={_debounce(this.handleSearch.bind(this), 500)}
-          style={{ width: '100%' }}
           underlineFocusStyle={{
             borderBottomColor: 'rgba(242, 101, 50, 0.55)',
             borderTopColor: 'rgba(242, 101, 50, 0.55)',
