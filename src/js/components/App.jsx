@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Header } from './Header.jsx';
+import { Search } from './Search.jsx';
 
 export const App = (props) => (
   <div>
@@ -12,7 +13,10 @@ export const App = (props) => (
       {props.children}
     </div> :
     null}
+
+    <Search />
   </div>
+
 );
 
 App.propTypes = {
