@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import { ResultsTable } from './ResultsTable.jsx';
 import { SearchBar } from './SearchBar.jsx';
 
-export class IndexPage extends PureComponent {
+export class Search extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { showResults: false };
@@ -18,8 +18,9 @@ export class IndexPage extends PureComponent {
 
   render(props) {
     return (
-      <div>
+      <div className="box-content">
         <SearchBar
+          className="search-bar"
           onSearchChange={(data, searchTerm) => (
             this.handleSearchChange(data, searchTerm)
           )}
