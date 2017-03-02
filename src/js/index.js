@@ -11,7 +11,6 @@ import { App } from './components/App.jsx';
 import { globalStyles } from './globalStyles.js';
 import { LegendRoute } from './routes/legend';
 import { ResultRoute } from './routes/result';
-import { IndexPage } from './components/IndexPage.jsx';
 
 // load styles into bundle
 import '../css/custom.css';
@@ -27,7 +26,6 @@ const routesConfig = {
   path: '/',
   // required - always load
   component: App,
-  indexRoute: { component: IndexPage },
   // loaded later on-demand
   // https://github.com/ReactTraining/react-router/blob/master/docs/guides/DynamicRouting.md#dynamic-routing
   childRoutes: [
