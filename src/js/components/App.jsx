@@ -7,6 +7,9 @@ export const App = (props) => (
   <div>
     <Header {...props} />
 
+    {/* persist the search bar */}
+    <Search />
+
     {/* show children components as we navigate */}
     {props.children ?
       <div className={'box-content mui-shadow'}>
@@ -14,7 +17,6 @@ export const App = (props) => (
     </div> :
     null}
 
-    <Search />
   </div>
 
 );
