@@ -22,6 +22,14 @@ body {
         rgba(0, 0, 0, 0.117647) 0px 1px 4px;
 }
 
+.search__wrap {
+  margin-bottom: 24px;
+}
+
+.search__bar {
+  width:100% !important;
+}
+
 /* laptops @media */
 @media screen
   and (min-device-width: 1200px)

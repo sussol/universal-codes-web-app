@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
+import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 
-import { FUZZY_SEARCH_URL } from '../settings';
+import { SEARCH_URL } from '../settings';
 
 /**
 * Debounce active update of table data
@@ -48,31 +49,68 @@ const _sameSearchTerm = (value, old) => value.trim() === old.trim();
 export class SearchBar extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = { value: '' };
+    this.state = { value: '', userExactSetting: false, userFuzzySetting: true };
   }
 
-  handleSearch(e, value) {
+  componentDidUpdate(previousProps, previousState) {
+    // re-run search?
+    if (previousState.userFuzzySetting !== this.state.userFuzzySetting) {
+      this.handleSearch(null, this.state.value, true);
+    }
+  }
+
+  /**
+  * handleSearch will call the API to search with the user-entered term
+  *
+  * @param {obj}    e - javascript Event() object
+  * @param {str}    value - user-entered search term
+  * @param {bool}   force - should the search be programmatically forced?
+  * @return {obj}   Promise - resulting Promise of fetch call
+  */
+  handleSearch(e, value, force) {
     const oldValue = this.state.value;
-    // save on API calls
-    if (value === '' || _sameSearchTerm(value, oldValue)) {
+    // * if 'force' param is 'true', this is bypassed
+    // * save on API calls
+    if (force !== true && _sameSearchTerm(value, oldValue)) {
       return false;
     }
 
     // store new term for comparison
     this.setState({ value });
 
-    // hit API for term
-    // @todo will need to search on more criteria + fuzzy
-    return fetch(`${FUZZY_SEARCH_URL}${value.toLowerCase()}`)
+    // * if user clears box, clear search
+    // * save on API calls
+    if (value === '') return this.props.onSearchClear();
+
+    const encodeValue = encodeURIComponent(value.toLowerCase());
+    // set URL
+    const exactSettingParameter = `&exact=${String(this.state.userExactSetting)}`;
+    const fuzzySettingParameter = `&fuzzy=${String(this.state.userFuzzySetting)}`;
+    const url = `${SEARCH_URL}${encodeValue}${exactSettingParameter}${fuzzySettingParameter}`;
+    // call API for results
+    return fetch(url)
       .then((res) => res.json())
+      // give results back to parent component
       .then((json) => this.props.onSearchChange(json, value));
+  }
+
+  /**
+  * onChangeUserSearchSetting toggles "exact" and "fuzzy" on/off when 'Exact search' is checked
+  *
+  * @param {bool}    isChecked - is the input selected or not
+  * @returns {obj}   new state of object
+  */
+  onChangeUserSearchSetting(isChecked) {
+    // toggle old state
+    return this.setState({ userExactSetting: isChecked, userFuzzySetting: !isChecked });
   }
 
   render() {
     return (
-      <div>
+      <div className="search__wrap">
         {/* search field */}
         <TextField
+          className="search__bar"
           floatingLabelStyle={{ color: 'rgb(242, 101, 50)' }}
           floatingLabelText="Search by generic drug name or universal code"
           id="drug-code-autocomplete"
@@ -88,6 +126,17 @@ export class SearchBar extends PureComponent {
           underlineStyle={{
             borderBottomColor: '#DDD',
           }}
+        />
+
+        {/* exact search */}
+        <Checkbox
+          iconStyle={{ fill: this.state.userFuzzySetting ?
+            'rgba(248,170,142,1)' :
+            'rgba(242,101,50,1)',
+          }}
+          className="search__option"
+          label="Exact search"
+          onCheck={(e, isChecked) => this.onChangeUserSearchSetting(isChecked)}
         />
       </div>
     );

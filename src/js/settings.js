@@ -9,4 +9,4 @@ const protocolByEnv = (env = process.env.NODE_ENV) => (
 
 export const SERVER_HOST = hostByEnv();
 export const PROTOCOL = protocolByEnv();
-export const FUZZY_SEARCH_URL = `${PROTOCOL}${SERVER_HOST}/items?fuzzy=`;
+export const SEARCH_URL = `${PROTOCOL}${SERVER_HOST}/items?search=`;
