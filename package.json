@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "lint": "eslint ./ --ext=\".js,.jsx\" --fix",
+    "lint": "eslint ./ --ext=\".js,.jsx\"",
     "webpack-server": "webpack-dev-server --hot --progress --colors",
     "web-server": "http-server -p 3000 .",
     "start": "npm run webpack-server & npm run web-server",
