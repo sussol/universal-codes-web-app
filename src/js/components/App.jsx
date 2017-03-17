@@ -1,14 +1,10 @@
 import React from 'react';
 
 import { Header } from './Header.jsx';
-import { Search } from './Search.jsx';
 
 export const App = (props) => (
   <div>
     <Header {...props} />
-
-    {/* persist the search bar */}
-    <Search />
 
     {/* show children components as we navigate */}
     {props.children ?

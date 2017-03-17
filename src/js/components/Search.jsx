@@ -18,7 +18,7 @@ export class Search extends PureComponent {
 
   render(props) {
     return (
-      <div className="box-content">
+      <div>
         <SearchBar
           className="search-bar"
           onSearchChange={(data, searchTerm) => (
