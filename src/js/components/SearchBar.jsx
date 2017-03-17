@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import TextField from 'material-ui/TextField';
 
 import { FUZZY_SEARCH_URL } from '../settings';
+import searchIcon from '../../img/search-icon.png';
 
 /**
 * Debounce active update of table data
@@ -89,6 +90,8 @@ export class SearchBar extends PureComponent {
             borderBottomColor: '#DDD',
           }}
         />
+        {/* search icon */}
+        <img alt="search" className="icon-search" src={searchIcon} />
       </div>
     );
   }

@@ -27,6 +27,13 @@ body {
   width:100% !important;
 }
 
+/* images */
+.icon-search {
+  position: absolute;
+  right: 6px;
+  top: 38px;
+}
+
 /* laptops @media */
 @media screen
   and (min-device-width: 1200px)
