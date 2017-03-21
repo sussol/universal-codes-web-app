@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import TextField from 'material-ui/TextField';
+import SearchIcon from 'material-ui/svg-icons/action/search';
 
 import { FUZZY_SEARCH_URL } from '../settings';
-import searchIcon from '../../img/search-icon.png';
 
 /**
 * Debounce active update of table data
@@ -52,6 +52,11 @@ export class SearchBar extends PureComponent {
     this.state = { value: '' };
   }
 
+  componentDidMount() {
+    // on start focus the input to hint for a user to search
+    this.textField.focus();
+  }
+
   handleSearch(e, value) {
     const oldValue = this.state.value;
     // save on API calls
@@ -76,10 +81,10 @@ export class SearchBar extends PureComponent {
         <TextField
           className="search-bar"
           floatingLabelStyle={{ color: 'rgb(242, 101, 50)' }}
-          floatingLabelText="Search by generic drug name or universal code"
-          id="drug-code-autocomplete"
+          floatingLabelText="Search by generic name or code"
           // accommodate slower typists
           onChange={_debounce(this.handleSearch.bind(this), 500)}
+          ref={(input) => (this.textField = input)}
           underlineFocusStyle={{
             borderBottomColor: 'rgba(242, 101, 50, 0.55)',
             borderTopColor: 'rgba(242, 101, 50, 0.55)',
@@ -91,7 +96,7 @@ export class SearchBar extends PureComponent {
           }}
         />
         {/* search icon */}
-        <img alt="search" className="icon-search" src={searchIcon} />
+        <SearchIcon alt="search" className="icon-search" color={'#CCC'} />
       </div>
     );
   }
