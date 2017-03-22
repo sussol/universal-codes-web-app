@@ -16,6 +16,12 @@ body {
   width: 100%;
 }
 
+.search-wrap-flex {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
 /* @decor */
 .mui-shadow {
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px,
@@ -29,25 +35,16 @@ body {
 
 /* images */
 .icon-search {
-  position: absolute;
-  right: 6px;
-  top: 38px;
-}
-
-/* laptops @media */
-@media screen
-  and (min-device-width: 1200px)
-  and (max-device-width: 1600px)
-  and (-webkit-min-device-pixel-ratio: 1) {
+  align-self: center;
 }
 
 /* laptops and up @media */
 @media screen
   and (min-width: 1200px) {
     .box-content {
-    max-width: 45%;
-    width: 45%;
-  }
+      max-width: 45%;
+      width: 45%;
+    }
 }
 
 /* @override */

@@ -76,7 +76,7 @@ export class SearchBar extends PureComponent {
 
   render() {
     return (
-      <div>
+      <div className="search-wrap-flex">
         {/* search field */}
         <TextField
           className="search-bar"
@@ -96,7 +96,11 @@ export class SearchBar extends PureComponent {
           }}
         />
         {/* search icon */}
-        <SearchIcon alt="search" className="icon-search" color={'#CCC'} />
+        <SearchIcon
+          alt="search"
+          className="icon-search"
+          color={'#CCC'}
+        />
       </div>
     );
   }
