@@ -12,7 +12,9 @@ export const App = (props) => (
       {props.children}
     </div> :
     null}
+
   </div>
+
 );
 
 App.propTypes = {
