@@ -58,12 +58,12 @@ export class SearchBar extends PureComponent {
   }
 
   buildApiUrl(state = this.state) {
-    let baseApiUrl = `${SEARCH_URL}`;
+    const baseSearchUrl = `${SEARCH_URL}${state.value.toLowerCase()}`;
     const startsWith = state.startsWithSearch;
     if (startsWith === false || startsWith === undefined) {
-      return (baseApiUrl += `${state.value.toLowerCase()}&fuzzy=true`);
+      return `${baseSearchUrl}&fuzzy=true`;
     }
-    return (baseApiUrl += `${state.value.toLowerCase()}&exact=false`);
+    return `${baseSearchUrl}&exact=false`;
   }
 
   handleSearch(e, value) {
