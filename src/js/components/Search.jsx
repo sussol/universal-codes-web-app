@@ -29,6 +29,7 @@ export class Search extends PureComponent {
         {this.state.showResults && <ResultsTable
           {...props}
           data={this.state.resultData}
+          numberOfResults={this.state.resultData.length}
           searchTerm={this.state.searchTerm}
         />}
       </div>

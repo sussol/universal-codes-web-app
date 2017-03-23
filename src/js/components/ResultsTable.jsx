@@ -15,8 +15,8 @@ const columns = [
 export class ResultsTable extends PureComponent {
   render() {
     return (
-      <div>
-        <h2>Results for {this.props.searchTerm}</h2>
+      <div className="results-table">
+        <h2>{this.props.numberOfResults} results for {this.props.searchTerm}</h2>
         <SussolReactTable
           columns={columns}
           tableData={this.props.data}
