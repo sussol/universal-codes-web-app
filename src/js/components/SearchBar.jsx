@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import TextField from 'material-ui/TextField';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 
-import { FUZZY_SEARCH_URL } from '../settings';
+import { SEARCH_URL } from '../settings';
 
 /**
 * Debounce active update of table data
@@ -57,6 +57,15 @@ export class SearchBar extends PureComponent {
     this.textField.focus();
   }
 
+  buildApiUrl(state = this.state) {
+    const baseSearchUrl = `${SEARCH_URL}${state.value.toLowerCase()}`;
+    const startsWith = state.startsWithSearch;
+    if (startsWith === false || startsWith === undefined) {
+      return `${baseSearchUrl}&fuzzy=true`;
+    }
+    return `${baseSearchUrl}&exact=false`;
+  }
+
   handleSearch(e, value) {
     const oldValue = this.state.value;
     // save on API calls
@@ -67,9 +76,8 @@ export class SearchBar extends PureComponent {
     // store new term for comparison
     this.setState({ value });
 
-    // hit API for term
-    // @todo will need to search on more criteria + fuzzy
-    return fetch(`${FUZZY_SEARCH_URL}${value.toLowerCase()}`)
+    // call API for search term
+    return fetch(this.buildApiUrl())
       .then((res) => res.json())
       .then((json) => this.props.onSearchChange(json, value));
   }
