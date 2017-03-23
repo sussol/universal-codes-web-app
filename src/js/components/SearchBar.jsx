@@ -149,6 +149,7 @@ export class SearchBar extends PureComponent {
           }}
           className="search__option"
           label="Exact search"
+          labelStyle={{ color: '#777' }}
           onCheck={(e, isChecked) => this.onChangeUserSearchSetting(isChecked)}
         />
       </div>
