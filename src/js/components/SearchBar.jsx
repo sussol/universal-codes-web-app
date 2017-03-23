@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
+import SearchIcon from 'material-ui/svg-icons/action/search';
 
 import { SEARCH_URL } from '../settings';
 
@@ -50,6 +51,11 @@ export class SearchBar extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { value: '', userExactSetting: false, userFuzzySetting: true };
+  }
+
+  componentDidMount() {
+    // on start focus the input to hint for a user to search
+    this.textField.focus();
   }
 
   componentDidUpdate(previousProps, previousState) {
@@ -107,26 +113,33 @@ export class SearchBar extends PureComponent {
 
   render() {
     return (
-      <div className="search__wrap">
-        {/* search field */}
-        <TextField
-          className="search__bar"
-          floatingLabelStyle={{ color: 'rgb(242, 101, 50)' }}
-          floatingLabelText="Search by generic drug name or universal code"
-          id="drug-code-autocomplete"
-          // accommodate slower typists
-          onChange={_debounce(this.handleSearch.bind(this), 500)}
-          style={{ width: '100%' }}
-          underlineFocusStyle={{
-            borderBottomColor: 'rgba(242, 101, 50, 0.55)',
-            borderTopColor: 'rgba(242, 101, 50, 0.55)',
-            borderLeftColor: 'rgba(242, 101, 50, 0.55)',
-            borderRightColor: 'rgba(242, 101, 50, 0.55)',
-          }}
-          underlineStyle={{
-            borderBottomColor: '#DDD',
-          }}
-        />
+      <div>
+        <div className="search-wrap-flex">
+          {/* search field */}
+          <TextField
+            className="search-bar"
+            floatingLabelStyle={{ color: 'rgb(242, 101, 50)' }}
+            floatingLabelText="Search by generic name or code"
+            // accommodate slower typists
+            onChange={_debounce(this.handleSearch.bind(this), 500)}
+            ref={(input) => (this.textField = input)}
+            underlineFocusStyle={{
+              borderBottomColor: 'rgba(242, 101, 50, 0.55)',
+              borderTopColor: 'rgba(242, 101, 50, 0.55)',
+              borderLeftColor: 'rgba(242, 101, 50, 0.55)',
+              borderRightColor: 'rgba(242, 101, 50, 0.55)',
+            }}
+            underlineStyle={{
+              borderBottomColor: '#DDD',
+            }}
+          />
+          {/* search icon */}
+          <SearchIcon
+            alt="search"
+            className="icon-search"
+            color={'#CCC'}
+          />
+        </div>
 
         {/* exact search */}
         <Checkbox
