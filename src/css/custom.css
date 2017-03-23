@@ -16,6 +16,10 @@ body {
   width: 100%;
 }
 
+.results-table {
+  margin-top: 24px;
+}
+
 .search-wrap-flex {
   display: flex;
   align-items: baseline;
