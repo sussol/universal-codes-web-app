@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import Checkbox from 'material-ui/Checkbox';
+import CircularProgress from 'material-ui/CircularProgress';
 import TextField from 'material-ui/TextField';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 
@@ -50,7 +51,7 @@ const _sameSearchTerm = (value, old) => value.trim() === old.trim();
 export class SearchBar extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = { value: '', userExactSetting: false, userFuzzySetting: true };
+    this.state = { value: '', startsWithSearch: false };
   }
 
   componentDidMount() {
@@ -60,9 +61,18 @@ export class SearchBar extends PureComponent {
 
   componentDidUpdate(previousProps, previousState) {
     // re-run search?
-    if (previousState.userFuzzySetting !== this.state.userFuzzySetting) {
+    if (previousState.startsWithSearch !== this.state.startsWithSearch) {
       this.handleSearch(null, this.state.value, true);
     }
+  }
+
+  buildApiUrl(state = this.state) {
+    const baseSearchUrl = `${SEARCH_URL}${state.value.toLowerCase()}`;
+    const startsWith = state.startsWithSearch;
+    if (startsWith === false || startsWith === undefined) {
+      return `${baseSearchUrl}&fuzzy=true`;
+    }
+    return `${baseSearchUrl}&exact=false`;
   }
 
   /**
@@ -81,34 +91,39 @@ export class SearchBar extends PureComponent {
       return false;
     }
 
-    // store new term for comparison
-    this.setState({ value });
-
     // * if user clears box, clear search
     // * save on API calls
-    if (value === '') return this.props.onSearchClear();
+    if (value === '') {
+      this.props.onSearchClear();
+      // set new state of value
+      this.setState({ value });
+      return false;
+    }
 
+    // percent-encode search term
     const encodeValue = encodeURIComponent(value.toLowerCase());
-    // set URL
-    const exactSettingParameter = `&exact=${String(this.state.userExactSetting)}`;
-    const fuzzySettingParameter = `&fuzzy=${String(this.state.userFuzzySetting)}`;
-    const url = `${SEARCH_URL}${encodeValue}${exactSettingParameter}${fuzzySettingParameter}`;
+    // store new term for comparison
+    this.setState({ value: encodeValue });
+
+    // start spinner wheel
+    this.setState({ fetchingResults: true });
     // call API for results
-    return fetch(url)
+    return fetch(this.buildApiUrl())
       .then((res) => res.json())
       // give results back to parent component
-      .then((json) => this.props.onSearchChange(json, value));
+      .then((json) => this.props.onSearchChange(json, value))
+      .then(() => this.setState({ fetchingResults: false }));
   }
 
   /**
-  * onChangeUserSearchSetting toggles "exact" and "fuzzy" on/off when 'Exact search' is checked
+  * onChangeUserSearchSetting toggles "exact" on/off when 'Exact search' is acted upon
   *
-  * @param {bool}    isChecked - is the input selected or not
+  * @param {bool}    isChecked - is the input selected or not; default is 'false'
   * @returns {obj}   new state of object
   */
   onChangeUserSearchSetting(isChecked) {
     // toggle old state
-    return this.setState({ userExactSetting: isChecked, userFuzzySetting: !isChecked });
+    return this.setState({ startsWithSearch: isChecked });
   }
 
   render() {
@@ -133,6 +148,15 @@ export class SearchBar extends PureComponent {
               borderBottomColor: '#DDD',
             }}
           />
+          {/* progress indicator */}
+          {this.state.fetchingResults &&
+            <CircularProgress
+              color="rgb(248, 170, 142)"
+              size={16}
+              style={{ width: 0, left: '-24px' }}
+              thickness={2}
+            />
+          }
           {/* search icon */}
           <SearchIcon
             alt="search"
@@ -143,13 +167,13 @@ export class SearchBar extends PureComponent {
 
         {/* exact search */}
         <Checkbox
-          iconStyle={{ fill: this.state.userFuzzySetting ?
-            'rgba(248,170,142,1)' :
-            'rgba(242,101,50,1)',
+          iconStyle={{ fill: this.state.startsWithSearch ?
+            'rgba(242,101,50,1)' :
+            'rgba(248,170,142,1)',
           }}
           className="search__option"
-          label="Exact search"
-          labelStyle={{ color: '#777' }}
+          label="Name or code begins with"
+          labelStyle={{ color: '#777', marginLeft: '-12px' }}
           onCheck={(e, isChecked) => this.onChangeUserSearchSetting(isChecked)}
         />
       </div>
