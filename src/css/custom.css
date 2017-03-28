@@ -49,10 +49,11 @@ body {
 /* @media laptops and down */
 @media screen
   and (max-width: 1200px) {
+    /* override */
     .bp-table-body-scroll-client { width: 100% !important; }
 }
 
-/* @override */
+/* @overrides */
 a {
   text-decoration: none !important;
 }
