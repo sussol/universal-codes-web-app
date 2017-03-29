@@ -5,38 +5,7 @@ import TextField from 'material-ui/TextField';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 
 import { SEARCH_URL } from '../settings';
-
-/**
-* Debounce active update of table data
-*
-* @param  {func}   func - heavy function to stall
-* @param  {int}    wait - interval to call func
-* @param  {bool}   immediate - run now
-* @return {func}
-*/
-function _debounce(func, wait, immediate) {
-  // init
-  let timeout;
-  // return closure so timeouts survive
-  // only to cancel them
-  return function debouncer(...args) {
-    const context = this;
-    function later() {
-      // reset timeout
-      timeout = null;
-      // run func
-      if (!immediate) func.apply(context, args);
-    }
-    const callNow = immediate && !timeout;
-    // clear previous timer from closure
-    // and start over
-    clearTimeout(timeout);
-    // start new wait tick
-    timeout = setTimeout(later, wait);
-    // call func now
-    if (callNow) func.apply(context, args);
-  };
-}
+import { debounce } from '../utils';
 
 /**
 * _sameSearchTerm returns whether or not a new and old search terms
@@ -136,7 +105,7 @@ export class SearchBar extends PureComponent {
             floatingLabelStyle={{ color: 'rgb(242, 101, 50)' }}
             floatingLabelText="Search by generic name or code"
             // accommodate slower typists
-            onChange={_debounce(this.handleSearch.bind(this), 500)}
+            onChange={debounce(this.handleSearch.bind(this), 500)}
             ref={(input) => (this.textField = input)}
             underlineFocusStyle={{
               borderBottomColor: 'rgba(242, 101, 50, 0.55)',
