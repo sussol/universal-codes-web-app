@@ -38,7 +38,7 @@ body {
   align-self: center;
 }
 
-/* laptops and up @media */
+/* @media laptops and up */
 @media screen
   and (min-width: 1200px) {
     .box-content {
@@ -46,11 +46,28 @@ body {
       width: 45%;
     }
 }
+/* @media laptops and down */
+@media screen
+  and (max-width: 1200px) {
+    /* override */
+    .bp-table-body-scroll-client { width: 100% !important; }
+}
 
-/* @override */
+/* @overrides */
 a {
   text-decoration: none !important;
 }
+
+/* react table */
+.bp-table-container { box-shadow: none !important; background-color: #FFF !important; }
+.bp-table-body .bp-table-last-in-row { box-shadow: none; }
+.bp-table-cell { padding: 15px 10px !important; box-shadow: 0 1px 0 rgb(224,224,224) inset !important; }
+.bp-table-column-headers .bp-table-header { box-shadow: none; }
+.bp-table-header-content button { text-align: left !important; background-color: #FFF !important; }
+.bp-table-column-headers { box-shadow: none !important; }
+.bp-table-column-headers .bp-table-header.bp-table-last-in-row { box-shadow: none !important; }
+.bp-table-resize-vertical .bp-table-resize-handle { left: -7px; }
+.bp-table-header-content button span { padding: 0 0 0 10px !important; }
 
 .header svg {
   fill: rgba(242, 101, 50, 0.55) !important;

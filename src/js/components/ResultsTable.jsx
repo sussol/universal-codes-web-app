@@ -13,12 +13,22 @@ const columns = [
 ];
 
 export class ResultsTable extends PureComponent {
+  userCopiedData(row, col) {
+    // get data we want to send on to "getCellClipboardData"
+    const data = document.querySelector(`.bp-table-cell-col-${col}.bp-table-cell-row-${row}`);
+    return data.textContent;
+  }
+
   render() {
     return (
       <div>
         <h2>Results for {this.props.searchTerm}</h2>
         <SussolReactTable
           columns={columns}
+          columnWidths={[400, 135]}
+          defaultRowHeight={48}
+          getCellClipboardData={this.userCopiedData}
+          isRowHeaderShown={false}
           tableData={this.props.data}
         />
       </div>
