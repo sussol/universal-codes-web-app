@@ -12,8 +12,8 @@ export class Search extends PureComponent {
   // @todo remove forced condition
   // respond to search input
   handleSearchChange(data, searchTerm) {
-    if (!data.length) return this.setState({ showResults: false });
-    return this.setState({ showResults: true, resultData: data, searchTerm });
+    if (!data || !data.length) this.setState({ showResults: false });
+    this.setState({ showResults: true, resultData: data, searchTerm });
   }
 
   render(props) {

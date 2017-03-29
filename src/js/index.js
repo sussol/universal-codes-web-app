@@ -25,11 +25,8 @@ const muiTheme = getMuiTheme(globalStyles);
 // react-router routes main config
 const routesConfig = {
   path: '/',
-  // required - always load
   component: App,
   indexRoute: { component: Search },
-  // loaded later on-demand
-  // https://github.com/ReactTraining/react-router/blob/master/docs/guides/DynamicRouting.md#dynamic-routing
   childRoutes: [
     AboutRoute,
     ApiRoute,
