@@ -42,8 +42,8 @@ body {
 @media screen
   and (min-width: 1200px) {
     .box-content {
-      max-width: 600px;
-      width: 600px;
+      max-width: 45%;
+      width: 45%;
     }
 }
 /* @media laptops and down */
