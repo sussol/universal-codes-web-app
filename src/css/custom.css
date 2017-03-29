@@ -18,6 +18,9 @@ body {
 
 .results-table {
   margin-top: 24px;
+  max-height: 2000px;
+  height: 2000px;
+  overflow-y: scroll;
 }
 
 .search-wrap-flex {
@@ -67,12 +70,18 @@ a {
 .bp-table-container { box-shadow: none !important; background-color: #FFF !important; }
 .bp-table-body .bp-table-last-in-row { box-shadow: none; }
 .bp-table-cell { padding: 15px 10px !important; box-shadow: 0 1px 0 rgb(224,224,224) inset !important; }
-.bp-table-column-headers .bp-table-header { box-shadow: none; }
+.bp-table-column-headers .bp-table-header { box-shadow: none !important; }
 .bp-table-header-content button { text-align: left !important; background-color: #FFF !important; }
+.bp-table-column-header-tr { box-shadow: 0 1px #182026; }
 .bp-table-column-headers { box-shadow: none !important; }
 .bp-table-column-headers .bp-table-header.bp-table-last-in-row { box-shadow: none !important; }
 .bp-table-resize-vertical .bp-table-resize-handle { left: -7px; }
 .bp-table-header-content button span { padding: 0 0 0 10px !important; }
+.bp-table-selection-region {
+  border: 1px solid #f26532 !important;
+  background-color: rgba(242, 101, 50, 0.06) !important;
+}
+
 
 .header svg {
   fill: rgba(242, 101, 50, 0.55) !important;
