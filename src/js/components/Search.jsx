@@ -9,10 +9,14 @@ export class Search extends PureComponent {
     this.state = { showResults: false };
   }
 
-  // @todo remove forced condition
   // respond to search input
   handleSearchChange(data, searchTerm) {
-    if (!data || !data.length) this.setState({ showResults: false });
+    if (!data || !data.length) {
+      // provide the table blank array for ".length"
+      this.setState({ showResults: false, resultData: [] });
+      // exit
+      return;
+    }
     this.setState({ showResults: true, resultData: data, searchTerm });
   }
 
