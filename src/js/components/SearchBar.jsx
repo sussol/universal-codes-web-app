@@ -42,16 +42,16 @@ function _debounce(func, wait, immediate) {
 * _sameSearchTerm returns whether or not a new and old search terms
 * are similar.
 *
-* @param {str}   value - new search value
-* @param {str}   old - previous search value, from local state
+* @param {str}   searchTerm - new search searchTerm
+* @param {str}   old - previous search searchTerm, from local state
 * @return {bool}
 */
-const _sameSearchTerm = (value, old) => value.trim() === old.trim();
+const _sameSearchTerm = (searchTerm, old) => searchTerm.trim() === old.trim();
 
 export class SearchBar extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = { value: '', startsWithSearch: true };
+    this.state = { searchTerm: '', startsWithSearch: true };
   }
 
   componentDidMount() {
@@ -62,12 +62,12 @@ export class SearchBar extends PureComponent {
   componentDidUpdate(previousProps, previousState) {
     // re-run search?
     if (previousState.startsWithSearch !== this.state.startsWithSearch) {
-      this.handleSearch(null, this.state.value, true);
+      this.handleSearch(null, this.state.searchTerm, true);
     }
   }
 
   buildApiUrl(state = this.state) {
-    const baseSearchUrl = `${SEARCH_URL}${state.value.toLowerCase()}`;
+    const baseSearchUrl = `${SEARCH_URL}${state.searchTerm.toLowerCase()}`;
     const startsWith = state.startsWithSearch;
     if (startsWith === false || startsWith === undefined) {
       return `${baseSearchUrl}&fuzzy=true`;
@@ -79,31 +79,31 @@ export class SearchBar extends PureComponent {
   * handleSearch will call the API to search with the user-entered term
   *
   * @param {obj}    e - javascript Event() object
-  * @param {str}    value - user-entered search term
+  * @param {str}    searchTerm - user-entered search term
   * @param {bool}   force - should the search be programmatically forced?
   * @return {obj}   Promise - resulting Promise of fetch call
   */
-  handleSearch(e, value, force) {
-    const oldValue = this.state.value;
+  handleSearch(e, searchTerm, force) {
+    const oldSearchTerm = this.state.searchTerm;
     // * if 'force' param is 'true', this is bypassed
     // * save on API calls
-    if (force !== true && _sameSearchTerm(value, oldValue)) {
+    if (force !== true && _sameSearchTerm(searchTerm, oldSearchTerm)) {
       return false;
     }
 
     // * if user clears box, clear search
     // * save on API calls
-    if (value === '') {
+    if (searchTerm === '') {
       this.props.onSearchClear();
-      // set new state of value
-      this.setState({ value });
+      // set new state of searchTerm
+      this.setState({ searchTerm });
       return false;
     }
 
     // percent-encode search term
-    const encodeValue = encodeURIComponent(value.toLowerCase());
+    const encodeSearchTerm = encodeURIComponent(searchTerm.toLowerCase());
     // store new term for comparison
-    this.setState({ value: encodeValue });
+    this.setState({ searchTerm: encodeSearchTerm });
 
     // start spinner wheel
     this.setState({ fetchingResults: true });
@@ -111,7 +111,7 @@ export class SearchBar extends PureComponent {
     return fetch(this.buildApiUrl())
       .then((res) => res.json())
       // give results back to parent component
-      .then((json) => this.props.onSearchChange(json, value))
+      .then((json) => this.props.onSearchChange(json, searchTerm))
       .then(() => this.setState({ fetchingResults: false }));
   }
 
