@@ -16,6 +16,10 @@ body {
   width: 100%;
 }
 
+.results-table {
+  margin-top: 24px;
+}
+
 .search-wrap-flex {
   display: flex;
   align-items: baseline;
@@ -25,17 +29,18 @@ body {
 /* @decor */
 .mui-shadow {
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px,
-        rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+              rgba(0, 0, 0, 0.117647) 0px 1px 4px;
 }
 
 .search-bar {
-  margin-bottom: 24px;
+  margin-bottom: 6px;
   width:100% !important;
 }
 
 /* images */
 .icon-search {
-  align-self: center;
+  position: relative;
+  top: 5px;
 }
 
 /* @media laptops and up */
