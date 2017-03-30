@@ -10,7 +10,7 @@ var isProd = process.env.NODE_ENV === 'production';
 // getEntrySources gets sources for webpack entry paths, by environment
 function getEntrySources(sources) {
   if (!isProd) {
-    sources.push('webpack-dev-server/client?http://localhost:8080');
+    sources.push('webpack-dev-server/client?http://localhost:' + (process.env.WEBPACK_SERVER_PORT || '8080'));
     sources.push('webpack/hot/only-dev-server');
   }
   return sources;
@@ -19,7 +19,6 @@ function getEntrySources(sources) {
 module.exports = {
   entry: getEntrySources(['babel-polyfill', './src/js/index.js']),
   output: {
-    publicPath: !isProd && 'http://localhost:8080/build/',
     path: __dirname + '/build',
     filename: 'bundle.js',
   },
@@ -66,8 +65,5 @@ module.exports = {
   ],
   stats: {
     warnings: false,
-  },
-  devServer: {
-    contentBase: './build',
   },
 };
