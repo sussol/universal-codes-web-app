@@ -43,3 +43,8 @@ export class ResultsTable extends PureComponent {
     );
   }
 }
+
+ResultsTable.propTypes = {
+  ...SussolReactTable.propTypes,
+  changeColumnWidths: React.PropTypes.func,
+};
