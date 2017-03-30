@@ -51,7 +51,7 @@ const _sameSearchTerm = (value, old) => value.trim() === old.trim();
 export class SearchBar extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = { value: '', startsWithSearch: false };
+    this.state = { value: '', startsWithSearch: true };
   }
 
   componentDidMount() {
@@ -167,11 +167,12 @@ export class SearchBar extends PureComponent {
 
         {/* exact search */}
         <Checkbox
+          defaultChecked
+          className="search__option"
           iconStyle={{ fill: this.state.startsWithSearch ?
             'rgba(242,101,50,1)' :
             'rgba(248,170,142,1)',
           }}
-          className="search__option"
           label="Name or code begins with"
           labelStyle={{ color: '#777', marginLeft: '-12px' }}
           onCheck={(e, isChecked) => this.onChangeUserSearchSetting(isChecked)}
