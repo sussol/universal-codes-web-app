@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint ./ --ext=\".js,.jsx\" --ignore-pattern=\"build\"",
-    "webpack-server": "webpack-dev-server --port=$WEBPACK_SERVER_PORT --hot --progress --colors",
+    "webpack-server": "webpack-dev-server --hot --progress --colors",
     "web-server": "http-server -p 3000 .",
     "start": "npm run webpack-server & npm run web-server",
     "build-development": "webpack --optimize-minimize",

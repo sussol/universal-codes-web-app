@@ -66,4 +66,7 @@ module.exports = {
   stats: {
     warnings: false,
   },
+  devServer: {
+    port: process.env.WEBPACK_SERVER_PORT || 8080
+  }
 };
