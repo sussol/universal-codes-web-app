@@ -1,9 +1,10 @@
-/* global test,expect true */
+import React from 'react';
+import { shallow } from 'enzyme';
 
-/**
-* @delete-me
-* And we begin with a proper, failing test ;-)
-**/
-test('expects JavaScript to be Java', () => {
-  expect('JavaScript').toBe('Java');
+import { App } from '../components/App';
+import { Search } from '../components/Search';
+
+test('App component can render children', () => {
+  const component = shallow(<App><Search /></App>);
+  expect(component.find(Search).length).toBe(1);
 });
