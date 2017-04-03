@@ -45,7 +45,7 @@ module.exports = {
         loader: 'style-loader!css-loader',
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg|woff|eot|ttf)$/,
+        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|eot|ttf)$/,
         loader: 'file-loader',
       },
     ],
