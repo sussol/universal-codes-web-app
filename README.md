@@ -1,4 +1,4 @@
-![Build Status](https://jenkins.msupply.org:8443/buildStatus/icon?job=universal-drug-codes-web-app-test)
+![Build Status](54.206.8.184:8080/buildStatus/icon?job=universal-drug-codes-web-app-test)
 
 Universal Drug Codes Web App
 ==============================
