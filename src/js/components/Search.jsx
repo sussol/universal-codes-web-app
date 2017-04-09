@@ -35,17 +35,33 @@ export class Search extends PureComponent {
   *  - provides naïve, but sane, column widths
   *  - currently, simply divides columns into equal widths
   *
-  * @param {columns}    columns - object of column data from Blueprint table
-  * @param {obj}        table - referenced table DOM element
+  * @param {arr}    columns - array of column data from Blueprint table
+  * @param {obj}    columnFixedWidths - column widths (keys = index, values = integer "px" widths)
+  * @param {int}    tableWidth - table's offsetWidth
   * @returns {arr|null} array of new widths, or null
   */
-  handleCalculateColumnWidths(columns, table) {
-    if (columns === undefined || table === undefined) return null;
-    // init array
-    const columnWidths = [0, 0];
-    const tableWrapWidthDivided = table.offsetWidth / columns.length;
-    for (let i = 0; i < columnWidths.length; i += 1) {
-      columnWidths[i] = tableWrapWidthDivided;
+  handleCalculateColumnWidths(columns, columnFixedWidths = [], tableWidth) {
+    if (columns === undefined || tableWidth === undefined) return null;
+    const columnWidths = [];
+
+    let totalFixedWidth = 0;
+    const fixedWidthArray = Object.values(columnFixedWidths);
+    // add total amount of fixed width to subtract from usable space
+    for (let i = 0; i < fixedWidthArray.length; i += 1) {
+      totalFixedWidth += fixedWidthArray[i];
+    }
+
+    // get useable lengths, minus any fixed table width data (columnFixedWidths)
+    const totalUseableLength = totalFixedWidth ? tableWidth - totalFixedWidth : tableWidth;
+    const tableWidthDivided = totalUseableLength / (columns.length - fixedWidthArray.length);
+
+    // set widths
+    for (let i = 0; i < columns.length; i += 1) {
+      if (totalFixedWidth && columnFixedWidths[i]) {
+        columnWidths.push(columnFixedWidths[i]);
+      } else {
+        columnWidths.push(tableWidthDivided);
+      }
     }
     this.setState({ columnWidths });
     return columnWidths;
@@ -64,7 +80,9 @@ export class Search extends PureComponent {
         {/* render results table */}
         {this.state.showResults && <ResultsTable
           {...props}
-          changeColumnWidths={(columns, table) => this.handleCalculateColumnWidths(columns, table)}
+          changeColumnWidths={(columns, columnWidths, tableWidth) => (
+            this.handleCalculateColumnWidths(columns, columnWidths, tableWidth)
+          )}
           columnWidths={this.state.columnWidths}
           columns={this.state.columns}
           data={this.state.resultData}
