@@ -36,11 +36,11 @@ export class Search extends PureComponent {
   *  - currently, simply divides columns into equal widths
   *
   * @param {arr}    columns - array of column data from Blueprint table
-  * @param {obj}    columnFixedWidths - column widths (keys = index, values = integer "px" widths)
   * @param {int}    tableWidth - table's offsetWidth
+  * @param {obj}    columnFixedWidths - column widths (keys = index, values = integer "px" widths)
   * @returns {arr|null} array of new widths, or null
   */
-  handleCalculateColumnWidths(columns, columnFixedWidths = [], tableWidth) {
+  handleCalculateColumnWidths(columns, tableWidth, columnFixedWidths = {}) {
     if (columns === undefined || tableWidth === undefined) return null;
     const columnWidths = [];
 
@@ -80,8 +80,8 @@ export class Search extends PureComponent {
         {/* render results table */}
         {this.state.showResults && <ResultsTable
           {...props}
-          changeColumnWidths={(columns, columnWidths, tableWidth) => (
-            this.handleCalculateColumnWidths(columns, columnWidths, tableWidth)
+          changeColumnWidths={(columns, tableWidth, columnFixedWidths) => (
+            this.handleCalculateColumnWidths(columns, tableWidth, columnFixedWidths)
           )}
           columnWidths={this.state.columnWidths}
           columns={this.state.columns}

@@ -8,10 +8,10 @@ export class ResultsTable extends PureComponent {
     // set columns we want to be fixed width
     const columnWidthData = { 1: 125 };
     // run init column widths on mount
-    this.props.changeColumnWidths(this.props.columns, columnWidthData, this.tableWrap.offsetWidth);
+    this.props.changeColumnWidths(this.props.columns, this.tableWrap.offsetWidth, columnWidthData);
     // store a reference so we can kill the proper listener later on
     this.columnSizeDebouncer = debounce(() => (
-      this.props.changeColumnWidths(this.props.columns, columnWidthData, this.tableWrap.offsetWidth)
+      this.props.changeColumnWidths(this.props.columns, this.tableWrap.offsetWidth, columnWidthData)
     ), 250);
     // start listening on window resize to change column size
     window.addEventListener('resize', this.columnSizeDebouncer);
