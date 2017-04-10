@@ -6,7 +6,7 @@ import { debounce } from '../utils';
 export class ResultsTable extends PureComponent {
   componentDidMount() {
     // set columns we want to be fixed width
-    const columnWidthData = { 1: 125 };
+    const columnWidthData = { 1: 150 };
     // run init column widths on mount
     this.props.changeColumnWidths(this.props.columns, this.tableWrap.offsetWidth, columnWidthData);
     // store a reference so we can kill the proper listener later on
