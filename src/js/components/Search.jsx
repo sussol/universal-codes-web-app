@@ -69,7 +69,7 @@ export class Search extends PureComponent {
 
   render(props) {
     return (
-      <div style={{ position: 'relative' }}>
+      <div className="search-area">
         <SearchBar
           className="search-bar"
           onSearchChange={(data, searchTerm) => (
