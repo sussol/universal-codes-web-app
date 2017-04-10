@@ -4,6 +4,11 @@ import { SussolReactTable } from 'sussol-react-table';
 import { debounce } from '../utils';
 
 export class ResultsTable extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = { height: 0 };
+  }
+
   componentDidMount() {
     // set columns we want to be fixed width
     const columnWidthData = { 1: 125 };
@@ -15,11 +20,26 @@ export class ResultsTable extends PureComponent {
     ), 250);
     // start listening on window resize to change column size
     window.addEventListener('resize', this.columnSizeDebouncer);
+
+    // set table height
+    this.props.getTableHeight(this.tableWrap);
+    // store a reference so we can kill the proper listener later on
+    this.tableHeightDebouncer = debounce(() => (
+      this.props.getTableHeight(this.tableWrap)
+    ), 250);
+    // start listening on window resize to change table height
+    window.addEventListener('resize', this.tableHeightDebouncer);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ height: nextProps.height });
   }
 
   componentWillUnmount() {
     // kill event resize on this.columnSizeDebouncer listener
     window.removeEventListener('resize', this.columnSizeDebouncer);
+    // kill event resize on this.tableHeightDebouncer listener
+    window.removeEventListener('resize', this.tableHeightDebouncer);
   }
 
   userCopiedData(row, col) {
@@ -30,17 +50,23 @@ export class ResultsTable extends PureComponent {
 
   render() {
     return (
-      <div className="results-table" ref={tableWrap => (this.tableWrap = tableWrap)}>
+      <div className="results-wrap">
         <h2>{this.props.numberOfResults} results for {this.props.searchTerm}</h2>
-        <SussolReactTable
-          columns={this.props.columns}
-          columnWidths={this.props.columnWidths}
-          defaultRowHeight={48}
-          getCellClipboardData={this.userCopiedData}
-          isRowHeaderShown={false}
-          ref={table => (this.table = table)}
-          tableData={this.props.data}
-        />
+        <div
+          className="results-table"
+          ref={tableWrap => (this.tableWrap = tableWrap)}
+          style={{ maxHeight: this.state.height, height: this.state.height }}
+        >
+          <SussolReactTable
+            columns={this.props.columns}
+            columnWidths={this.props.columnWidths}
+            defaultRowHeight={48}
+            getCellClipboardData={this.userCopiedData}
+            isRowHeaderShown={false}
+            ref={table => (this.table = table)}
+            tableData={this.props.data}
+          />
+        </div>
       </div>
     );
   }
