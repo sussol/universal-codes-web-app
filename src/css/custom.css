@@ -23,6 +23,8 @@ body {
   overflow-y: scroll;
 }
 
+.search-area { position: relative; }
+
 .search-wrap-flex {
   display: flex;
   align-items: baseline;
@@ -49,9 +51,16 @@ body {
 /* @media laptops and up */
 @media screen
   and (min-width: 1200px) {
-    .box-content {
-      max-width: 45%;
-      width: 45%;
+    /* content pages go smaller for readability*/
+    .box-content > div {
+      max-width: 800px;
+      width: 800px;
+    }
+
+    /* search stays wide */
+    .box-content .search-area {
+      max-width: 100%;
+      width: 100%;
     }
 }
 /* @media laptops and down */
