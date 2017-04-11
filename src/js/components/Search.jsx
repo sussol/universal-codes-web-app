@@ -19,6 +19,18 @@ export class Search extends PureComponent {
     };
   }
 
+  componentDidMount() {
+    // disable html, body scroll
+    const htmlBody = document.querySelector('html, body');
+    htmlBody.classList.add('no-scroll');
+  }
+
+  componentWillUnmount() {
+    // enable html, body scroll
+    const htmlBody = document.querySelector('html, body');
+    htmlBody.classList.remove('no-scroll');
+  }
+
   // respond to search input
   handleSearchChange(data, searchTerm) {
     if (!data || !data.length) {
@@ -68,6 +80,11 @@ export class Search extends PureComponent {
           columnWidths={this.state.columnWidths}
           columns={this.state.columns}
           data={this.state.resultData}
+          getTableHeight={(tableRef) => {
+            const height = (document.documentElement.clientHeight - tableRef.offsetTop) - 100;
+            this.setState({ tableHeight: height });
+          }}
+          height={this.state.tableHeight}
           numberOfResults={this.state.resultData.length}
           searchTerm={this.state.searchTerm}
         />}
