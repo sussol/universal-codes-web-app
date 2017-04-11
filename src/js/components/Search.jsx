@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 
 import { ResultsTable } from './ResultsTable.jsx';
 import { SearchBar } from './SearchBar.jsx';
+import { ColumnFixedWidths } from '../settings';
 
 export class Search extends PureComponent {
   constructor(props) {
@@ -14,7 +15,6 @@ export class Search extends PureComponent {
         key: 'code',
         title: 'Code',
       }],
-      columnWidths: [400, 135],
       showResults: false,
     };
   }
@@ -44,12 +44,12 @@ export class Search extends PureComponent {
     if (columns === undefined || tableWidth === undefined) return null;
     const columnWidths = [];
 
-    let totalFixedWidth = 0;
     const fixedWidthArray = Object.values(columnFixedWidths);
     // add total amount of fixed width to subtract from usable space
-    for (let i = 0; i < fixedWidthArray.length; i += 1) {
-      totalFixedWidth += fixedWidthArray[i];
-    }
+    const totalFixedWidth = fixedWidthArray.reduce((sum, width) => {
+      let sumClone = sum;
+      return (sumClone += width);
+    }, 0);
 
     // get useable lengths, minus any fixed table width data (columnFixedWidths)
     const totalUseableLength = totalFixedWidth ? tableWidth - totalFixedWidth : tableWidth;
@@ -83,6 +83,7 @@ export class Search extends PureComponent {
           changeColumnWidths={(columns, tableWidth, columnFixedWidths) => (
             this.handleCalculateColumnWidths(columns, tableWidth, columnFixedWidths)
           )}
+          columnWidthSettings={ColumnFixedWidths}
           columnWidths={this.state.columnWidths}
           columns={this.state.columns}
           data={this.state.resultData}
