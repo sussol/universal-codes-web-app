@@ -10,6 +10,8 @@ body {
   height: 100%;
 }
 
+h2 { margin: 24px 0; }
+
 /* @module */
 .box-content {
   margin: 0 auto;
