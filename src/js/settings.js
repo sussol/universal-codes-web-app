@@ -1,6 +1,6 @@
 // which version to deploy / test
 const API_VERSION = process.env.API_VERSION || 'v1';
-const hostByEnv = (env = process.env.NODE_ENV) => {
+const _hostByEnv = (env = process.env.NODE_ENV) => {
   if (env === 'production') {
     return `api.universalcodes.msupply.org.nz/${API_VERSION}`;
   }
