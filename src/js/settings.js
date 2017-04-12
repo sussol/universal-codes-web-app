@@ -1,7 +1,8 @@
+// which version to deploy / test
+const API_VERSION = process.env.API_VERSION || 'v1';
 const _hostByEnv = (env = process.env.NODE_ENV) => {
   if (env === 'production') {
-	// @todo change on API launch
-    return 'yadaiamy6e.execute-api.ap-southeast-2.amazonaws.com/dev';
+    return `api.universalcodes.msupply.org.nz/${API_VERSION}`;
   }
   return 'yadaiamy6e.execute-api.ap-southeast-2.amazonaws.com/dev';
 };
