@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import Checkbox from 'material-ui/Checkbox';
-import CircularProgress from 'material-ui/CircularProgress';
+import LinearProgress from 'material-ui/LinearProgress';
 import TextField from 'material-ui/TextField';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 
@@ -100,32 +100,38 @@ export class SearchBar extends PureComponent {
       <div>
         <div className="search-wrap-flex">
           {/* search field */}
-          <TextField
-            className="search-bar"
-            floatingLabelStyle={{ color: 'rgb(242, 101, 50)' }}
-            floatingLabelText="Search by generic name or code"
-            // accommodate slower typists
-            onChange={debounce(this.handleSearch.bind(this), 500)}
-            ref={(input) => (this.textField = input)}
-            underlineFocusStyle={{
-              borderBottomColor: 'rgba(242, 101, 50, 0.55)',
-              borderTopColor: 'rgba(242, 101, 50, 0.55)',
-              borderLeftColor: 'rgba(242, 101, 50, 0.55)',
-              borderRightColor: 'rgba(242, 101, 50, 0.55)',
-            }}
-            underlineStyle={{
-              borderBottomColor: '#DDD',
-            }}
-          />
-          {/* progress indicator */}
-          {this.state.fetchingResults &&
-            <CircularProgress
-              color="rgb(248, 170, 142)"
-              size={16}
-              style={{ width: 0, left: '-24px' }}
-              thickness={2}
+          <div className="search-bar">
+            <TextField
+              floatingLabelStyle={{ color: 'rgb(242, 101, 50)' }}
+              floatingLabelText="Search by generic name or code"
+              // accommodate slower typists
+              onChange={debounce(this.handleSearch.bind(this), 500)}
+              ref={(input) => (this.textField = input)}
+              style={{ width: '100%' }}
+              underlineFocusStyle={{
+                borderBottomColor: 'rgba(242, 101, 50, 0.55)',
+                borderTopColor: 'rgba(242, 101, 50, 0.55)',
+                borderLeftColor: 'rgba(242, 101, 50, 0.55)',
+                borderRightColor: 'rgba(242, 101, 50, 0.55)',
+              }}
+              underlineStyle={{
+                borderBottomColor: '#DDD',
+              }}
             />
-          }
+            {/* progress indicator */}
+            {this.state.fetchingResults &&
+              <LinearProgress
+                color="rgb(248, 170, 142)"
+                style={{
+                  height: '2px',
+                  position: 'relative', /* take exact width of parent */
+                  margin: '0 0 -2px', /* light positioning into place */
+                  top: '-10px', /* light positioning into place */
+                  backgroundColor: '#EEE',
+                }}
+              />
+            }
+          </div>
           {/* search icon */}
           <SearchIcon
             alt="search"
