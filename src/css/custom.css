@@ -24,7 +24,6 @@ h2 { margin: 24px 0; }
 
 .results-table {
   margin-top: 24px;
-  overflow-y: scroll;
 }
 
 .search-area { position: relative; }
@@ -86,6 +85,7 @@ a {
 
 /* react table */
 .bp-table-container { box-shadow: none !important; background-color: #FFF !important; }
+.bp-table-body { overflow-y: scroll !important; overflow-x: hidden !important; }
 .bp-table-body .bp-table-last-in-row { box-shadow: none; }
 .bp-table-cell {
   padding: 15px 10px !important;
