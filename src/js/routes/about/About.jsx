@@ -23,7 +23,7 @@ export class About extends PureComponent {
         </ul>
 
         <h2>How?</h2>
-        <p>You can browser universal codes on this site, or use the API at <a href="https://sussol.github.io/universal-drug-codes-server/">https://sussol.github.io/universal-drug-codes-server/</a></p>
+        <p>You can browse universal codes on this site, or use the API at <a href="https://sussol.github.io/universal-drug-codes-server/">https://sussol.github.io/universal-drug-codes-server/</a></p>
 
         <h2>How much?</h2>
         <p>It’s free.<br />
