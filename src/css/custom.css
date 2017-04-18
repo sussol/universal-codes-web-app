@@ -10,7 +10,7 @@ body {
   height: 100%;
 }
 
-h2 { margin: 24px 0; }
+h2 { margin: 24px 0 18px; }
 
 /* @module */
 .box-content {
@@ -42,7 +42,7 @@ h2 { margin: 24px 0; }
 
 .search-bar {
   margin-bottom: 6px;
-  width:100% !important;
+  width:100%;
 }
 
 /* images */
@@ -70,7 +70,7 @@ h2 { margin: 24px 0; }
 @media screen
   and (max-width: 1200px) {
     /* override */
-    .bp-table-body-scroll-client { width: 100% !important; }
+    .bp-table-body-scroll-client { width: 100%; }
 }
 
 /* @helper */
@@ -84,24 +84,24 @@ a {
 }
 
 /* react table */
-.bp-table-container { box-shadow: none !important; background-color: #FFF !important; }
-.bp-table-body { overflow-y: scroll !important; overflow-x: hidden !important; }
-.bp-table-body .bp-table-last-in-row { box-shadow: none; }
+.bp-table-container { box-shadow: none !important; background-color: #FFF; }
+.bp-table-container:focus { outline: none; }
+.bp-table-body { overflow-y: scroll; overflow-x: hidden; }
 .bp-table-cell {
-  padding: 15px 10px !important;
+  padding: 15px 10px;
   box-shadow: 0 1px 0 rgb(224,224,224) inset !important;
-  transition: .25s ease-in-out !important; /* looks nice on column resize */
+  transition: .25s ease-in-out; /* looks nice on column resize */
 }
-.bp-table-column-headers .bp-table-header { box-shadow: none !important; transition: .25s ease-in-out !important; }
-.bp-table-header-content button { text-align: left !important; background-color: #FFF !important; }
+.bp-table-column-headers .bp-table-header { box-shadow: none; transition: .25s ease-in-out; }
+.bp-table-header-content button { text-align: left !important; background-color: #FFF; }
 .bp-table-column-header-tr { box-shadow: 0 1px #182026; }
-.bp-table-column-headers { box-shadow: none !important; background-color: #FFF !important; }
-.bp-table-column-headers .bp-table-header.bp-table-last-in-row { box-shadow: none !important; }
+.bp-table-column-headers { box-shadow: none; background-color: #FFF; }
+.bp-table-column-headers .bp-table-header.bp-table-last-in-row { box-shadow: none; }
 .bp-table-resize-vertical .bp-table-resize-handle { left: -7px; }
-.bp-table-header-content button span { padding: 0 0 0 10px !important; }
+.bp-table-header-content button span { padding: 0 0 0 10px; }
 .bp-table-selection-region {
-  border: 1px solid #f26532 !important;
-  background-color: rgba(242, 101, 50, 0.06) !important;
+  border: 1px solid #f26532;
+  background-color: rgba(242, 101, 50, 0.06);
 }
 
 .header svg {

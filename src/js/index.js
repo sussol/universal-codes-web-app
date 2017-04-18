@@ -14,11 +14,11 @@ import { ResultRoute } from './routes/result';
 import { Search } from './components/Search.jsx';
 
 // load styles into bundle
-import '../css/custom.css';
 import '../fonts/fonts.css';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
 import '@blueprintjs/table/dist/table.css';
+import '../css/custom.css';
 
 // Apply app wide styles here (http://www.material-ui.com/#/customization/themes)
 const muiTheme = getMuiTheme(globalStyles);
