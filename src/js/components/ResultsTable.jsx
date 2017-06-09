@@ -55,7 +55,7 @@ export class ResultsTable extends PureComponent {
         <div
           className="results-table"
           ref={tableWrap => (this.tableWrap = tableWrap)}
-          style={{ maxHeight: this.state.height, height: this.state.height }}
+          style={{ maxHeight: this.props.height, height: this.props.height }}
         >
           <SussolReactTable
             columns={this.props.columns}

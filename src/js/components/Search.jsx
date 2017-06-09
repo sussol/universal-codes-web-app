@@ -100,7 +100,18 @@ export class Search extends PureComponent {
           columns={this.state.columns}
           data={this.state.resultData}
           getTableHeight={(tableRef) => {
-            const height = (document.documentElement.clientHeight - tableRef.offsetTop) - 100;
+            // covers cases of:
+            //   - mobile screens in portrait
+            //   - everything else that's _not_ mobile in landscape
+            let height = (document.documentElement.clientHeight - tableRef.offsetTop) - 100;
+
+            // mobile screens in landscape only
+            const landscapeString = 'screen and (orientation: landscape) and (max-width: 820px)';
+            if (window.matchMedia(landscapeString).matches) {
+              height = tableRef.offsetTop;
+            }
+
+            // set the height
             this.setState({ tableHeight: height });
           }}
           height={this.state.tableHeight}

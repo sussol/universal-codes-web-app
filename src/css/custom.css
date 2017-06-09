@@ -73,9 +73,18 @@ h2 { margin: 24px 0 18px; }
     .bp-table-body-scroll-client { width: 100%; }
 }
 
+/* @media mobile's in landscape view */
+@media screen and (orientation: landscape) and (max-width: 800px) {
+  .no-scroll {
+    overflow-y: scroll !important;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 /* @helper */
 .no-scroll {
   overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* @overrides */
