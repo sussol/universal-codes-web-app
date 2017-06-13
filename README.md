@@ -29,6 +29,23 @@ If you'd to run the project on a port other than `:8080`:
 * [`react-hot-loader`](https://github.com/gaearon/react-hot-loader) ("Tweak React components in real time.")
 * [`webpack-dev-server`](https://github.com/webpack/webpack-dev-server) (watch for changes and re-compile)
 
+## Deploying
+Deployment happens by release branch indentification. Create a `release-x.x.x` (e.g. release-1.0.0) branch after pulling from `master`. Push the branch to `origin`.
+
+```
+git checkout master
+git pull
+git checkout -b release-x.x.x
+git push origin HEAD
+```
+
+After the release branch is pushed and the deployment succeeds, be sure to create a tag (e.g. v1.0.0) for the release (the release branch should be checked out):
+
+```
+git tag vX.X.X
+git push --tags
+```
+
 ## Testing
 
 `npm test`
