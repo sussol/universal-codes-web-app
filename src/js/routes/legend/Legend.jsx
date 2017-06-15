@@ -5,21 +5,12 @@ export class Legend extends PureComponent {
     return (
       <div>
         <h2>Legend for EML coding</h2>
-        <p><strong>1. Characters 1-4:</strong> Drug name</p>
-        <p><strong>2. Characters 5-8:</strong> Drug strength; First character Hundreds, then tens,
-          then units then tenths. When strength given in thousands, the strength
-          was considered to move up in standard unit (mcg to mg, mg to g etc.).
-          When drug strength presented in percentage form, the first character
-          is strengths in tens, then units, then tenths and a hundredths in final column.
-          Where no strength indicated 0000 coded.
-        </p>
-        <p><strong>3. Characters 9-11:</strong> Drug formulation</p>
-        <p>
-          <strong>4. Characters 12-14: </strong>
-          Describe either salt form (coded), duration of transdermal
-          patches or volume or oral liquid / injection where required.
-          (See Table 2). Where no descriptive requirement exists, 000 given.
-        </p>
+        <p>In previous iterations of our universal code server we had considered using a structured code. However, we have decided it is bad practice to overload a code with meaning. Information such as strength, dose form, ATC code, WHO code etc will be provided via other fields returned by the API in future versions.</p>
+        <p>The two properties of our codes that matter are:</p>
+          <ul><li>uniqueness</li>
+            <li>immutability- once an item is assigned a code, it ain't ever going to change.</li> 
+            <li>(and less so)readability- they are short and unambiguous when read by a human, which will occasionally be useful. We do, however, expect most "reading" of the codes to be done by machines, the two points above are all that matter</li>
+          </ul>
       </div>
     );
   }
