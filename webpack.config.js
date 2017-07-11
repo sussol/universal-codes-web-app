@@ -24,29 +24,28 @@ module.exports = {
   },
   devtool: isProd ? 'cheap-module-source-map' : 'eval',
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.jsx?$/,
+        enforce: 'pre',
         exclude: /node_modules/,
-        loader: 'source-map',
+        use: 'source-map-loader',
       },
-    ],
-    loaders: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loaders: [
-          'react-hot',
-          'babel',
+          'react-hot-loader',
+          'babel-loader',
         ],
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader',
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|eot|ttf)$/,
-        loader: 'file-loader',
+        use: 'file-loader',
       },
     ],
   },
@@ -58,7 +57,7 @@ module.exports = {
       env: env,
     }),
     new webpack.ProvidePlugin({
-      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env),
