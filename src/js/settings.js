@@ -1,6 +1,6 @@
 // which version to deploy / test
 const API_VERSION = process.env.API_VERSION || 'v1';
-const _hostByEnv = (env = process.env.NODE_ENV) => {
+const hostByEnv = (env = process.env.NODE_ENV) => {
   if (env === 'production') {
     return `api.universalcodes.msupply.org.nz/${API_VERSION}`;
   }
@@ -11,6 +11,6 @@ const _hostByEnv = (env = process.env.NODE_ENV) => {
 // e.g. column 1 should be 150px
 export const ColumnFixedWidths = { 1: 150 };
 
-export const SERVER_HOST = _hostByEnv();
+export const SERVER_HOST = hostByEnv();
 // local will call dev upstream
 export const SEARCH_URL = `https://${SERVER_HOST}/items?search=`;

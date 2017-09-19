@@ -1,4 +1,4 @@
-import { Legend } from './Legend.jsx';
+import { Legend } from './Legend';
 
 export const LegendRoute = {
   path: 'legend',

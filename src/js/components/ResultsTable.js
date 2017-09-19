@@ -1,7 +1,14 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { SussolReactTable } from 'sussol-react-table';
 
 import { debounce } from '../utils';
+
+const userCopiedData = (row, col) => {
+  // get data we want to send on to "getCellClipboardData"
+  const data = document.querySelector(`.bp-table-cell-col-${col}.bp-table-cell-row-${row}`);
+  return data.textContent;
+};
 
 export class ResultsTable extends PureComponent {
   constructor(props) {
@@ -42,29 +49,23 @@ export class ResultsTable extends PureComponent {
     window.removeEventListener('resize', this.tableHeightDebouncer);
   }
 
-  userCopiedData(row, col) {
-    // get data we want to send on to "getCellClipboardData"
-    const data = document.querySelector(`.bp-table-cell-col-${col}.bp-table-cell-row-${row}`);
-    return data.textContent;
-  }
-
   render() {
     return (
       <div className="results-wrap">
         <h2>{this.props.numberOfResults} results for {this.props.searchTerm}</h2>
         <div
           className="results-table"
-          ref={tableWrap => (this.tableWrap = tableWrap)}
+          ref={(tableWrap) => { this.tableWrap = tableWrap; }}
           style={{ maxHeight: this.props.height, height: this.props.height }}
         >
           <SussolReactTable
             columns={this.props.columns}
             columnWidths={this.props.columnWidths}
             defaultRowHeight={48}
-            getCellClipboardData={this.userCopiedData}
+            getCellClipboardData={userCopiedData}
             isRowHeaderShown={false}
-            ref={table => (this.table = table)}
             tableData={this.props.data}
+            ref={(table) => { this.table = table; }}
           />
         </div>
       </div>
@@ -72,7 +73,11 @@ export class ResultsTable extends PureComponent {
   }
 }
 
+ResultsTable.defaultProps = {
+  changeColumnWidths: () => {},
+};
+
 ResultsTable.propTypes = {
   ...SussolReactTable.propTypes,
-  changeColumnWidths: React.PropTypes.func,
+  changeColumnWidths: PropTypes.func,
 };

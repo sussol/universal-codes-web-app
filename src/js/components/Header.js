@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import AppBar from 'material-ui/AppBar';
 
-import { Menu } from './Menu.jsx';
+import { Menu } from './Menu';
 
 const styles = {
   backgroundColor: '#FFF',
@@ -26,7 +26,7 @@ export class Header extends PureComponent {
   // when drawer's 'dock' prop is set to 'false'
   // you can press 'esc' to close, or click the outer canvas
   // thus, provide a callback for chance to change the visible state
-  handleDrawerChange = (open) => this.setState({ open })
+  handleDrawerChange = open => this.setState({ open })
 
   render() {
     return (

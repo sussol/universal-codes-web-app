@@ -1,4 +1,6 @@
+import 'whatwg-fetch';
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Checkbox from 'material-ui/Checkbox';
 import LinearProgress from 'material-ui/LinearProgress';
 import TextField from 'material-ui/TextField';
@@ -7,15 +9,23 @@ import SearchIcon from 'material-ui/svg-icons/action/search';
 import { SEARCH_URL } from '../settings';
 import { debounce } from '../utils';
 
+const buildApiUrl = ({ searchTerm, startsWith }) => {
+  const baseSearchUrl = `${SEARCH_URL}${searchTerm.toLowerCase()}`;
+  if (startsWith === false || startsWith === undefined) {
+    return `${baseSearchUrl}&fuzzy=true`;
+  }
+  return `${baseSearchUrl}&exact=false`;
+};
+
 /**
-* _sameSearchTerm returns whether or not a new and old search terms
+* sameSearchTerm returns whether or not a new and old search terms
 * are similar.
 *
 * @param {str}   searchTerm - new search searchTerm
 * @param {str}   old - previous search searchTerm, from local state
 * @return {bool}
 */
-const _sameSearchTerm = (searchTerm, old) => searchTerm.trim() === old.trim();
+const sameSearchTerm = (searchTerm, old) => searchTerm.trim() === old.trim();
 
 export class SearchBar extends PureComponent {
   constructor(props) {
@@ -35,13 +45,15 @@ export class SearchBar extends PureComponent {
     }
   }
 
-  buildApiUrl(state = this.state) {
-    const baseSearchUrl = `${SEARCH_URL}${state.searchTerm.toLowerCase()}`;
-    const startsWith = state.startsWithSearch;
-    if (startsWith === false || startsWith === undefined) {
-      return `${baseSearchUrl}&fuzzy=true`;
-    }
-    return `${baseSearchUrl}&exact=false`;
+  /**
+  * onChangeUserSearchSetting toggles "exact" on/off when 'Exact search' is acted upon
+  *
+  * @param {bool}    isChecked - is the input selected or not; default is 'false'
+  * @returns {obj}   new state of object
+  */
+  onChangeUserSearchSetting(isChecked) {
+    // toggle old state
+    return this.setState({ startsWithSearch: isChecked });
   }
 
   /**
@@ -56,7 +68,7 @@ export class SearchBar extends PureComponent {
     const oldSearchTerm = this.state.searchTerm;
     // * if 'force' param is 'true', this is bypassed
     // * save on API calls
-    if (force !== true && _sameSearchTerm(searchTerm, oldSearchTerm)) {
+    if (force !== true && sameSearchTerm(searchTerm, oldSearchTerm)) {
       return false;
     }
 
@@ -77,22 +89,11 @@ export class SearchBar extends PureComponent {
     // start spinner wheel
     this.setState({ fetchingResults: true });
     // call API for results
-    return fetch(this.buildApiUrl())
-      .then((res) => res.json())
+    return fetch(buildApiUrl(this.state))
+      .then(res => res.json())
       // give results back to parent component
-      .then((json) => this.props.onSearchChange(json, searchTerm))
+      .then(json => this.props.onSearchChange(json, searchTerm))
       .then(() => this.setState({ fetchingResults: false }));
-  }
-
-  /**
-  * onChangeUserSearchSetting toggles "exact" on/off when 'Exact search' is acted upon
-  *
-  * @param {bool}    isChecked - is the input selected or not; default is 'false'
-  * @returns {obj}   new state of object
-  */
-  onChangeUserSearchSetting(isChecked) {
-    // toggle old state
-    return this.setState({ startsWithSearch: isChecked });
   }
 
   render() {
@@ -105,8 +106,12 @@ export class SearchBar extends PureComponent {
               floatingLabelStyle={{ color: 'rgb(242, 101, 50)' }}
               floatingLabelText="Search by generic name or code"
               // accommodate slower typists
-              onChange={debounce(this.handleSearch.bind(this), 500)}
-              ref={(input) => (this.textField = input)}
+              onChange={
+                debounce(
+                  this.handleSearch.bind(this), 500, // eslint-disable-line react/jsx-no-bind
+                )
+              }
+              ref={(input) => { this.textField = input; }}
               style={{ width: '100%' }}
               underlineFocusStyle={{
                 borderBottomColor: 'rgba(242, 101, 50, 0.55)',
@@ -157,6 +162,11 @@ export class SearchBar extends PureComponent {
   }
 }
 
+SearchBar.defaultProps = {
+  onSearchClear: () => {},
+};
+
 SearchBar.propTypes = {
-  params: React.PropTypes.object,
+  onSearchChange: PropTypes.func.isRequired,
+  onSearchClear: PropTypes.func,
 };
