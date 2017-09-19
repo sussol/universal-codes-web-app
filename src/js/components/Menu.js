@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { Link } from 'react-router';
@@ -11,7 +12,7 @@ export class Menu extends PureComponent {
       <Drawer
         docked={false}
         open={this.props.open}
-        onRequestChange={(open) => this.props.drawerChange(open)}
+        onRequestChange={open => this.props.drawerChange(open)}
       >
         <Link to="/">
           <MenuItem onTouchTap={this.props.close} primaryText="Search" />
@@ -30,8 +31,13 @@ export class Menu extends PureComponent {
   }
 }
 
+Menu.defaultProps = {
+  close: () => {},
+  drawerChange: () => {},
+};
+
 Menu.propTypes = {
-  close: React.PropTypes.func,
-  open: React.PropTypes.bool,
-  drawerChange: React.PropTypes.func,
+  close: PropTypes.func,
+  open: PropTypes.bool.isRequired,
+  drawerChange: PropTypes.func,
 };
