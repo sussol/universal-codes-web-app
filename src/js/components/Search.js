@@ -39,7 +39,7 @@ export class Search extends PureComponent {
   handleSearchChange(data, searchTerm) {
     if (!data || !data.length) {
       // provide the table blank array for ".length"
-      this.setState({ showResults: false, resultData: [] });
+      this.setState({ showResults: false, resultData: [], searchTerm });
       // exit
       return;
     }
@@ -110,7 +110,7 @@ export class Search extends PureComponent {
           onSearchChange={(data, searchTerm) => (
             this.handleSearchChange(data, searchTerm)
           )}
-          onSearchClear={() => this.handleSearchChange(null)}
+          onSearchClear={() => this.handleSearchChange(null, '')}
         />
         {/* render results table */}
         {
