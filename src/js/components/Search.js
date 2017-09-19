@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import Snackbar from 'material-ui/Snackbar';
 
 import { SearchBar } from './SearchBar';
 import { ColumnFixedWidths } from '../settings';
@@ -143,6 +144,18 @@ export class Search extends PureComponent {
             searchTerm={this.state.searchTerm}
           />
         }
+
+        {/* "no results" notification */}
+        <Snackbar
+          open={
+            (this.state.resultData
+            && this.state.resultData.length === 0
+            && this.state.searchTerm !== '')
+            || false
+          }
+          message={`No results found for ${this.state.searchTerm}`}
+          autoHideDuration={4000}
+        />
       </div>
     );
   }
