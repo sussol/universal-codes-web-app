@@ -1,4 +1,4 @@
-import { Api } from './Api.jsx';
+import { Api } from './Api';
 
 export const ApiRoute = {
   path: '/api',
