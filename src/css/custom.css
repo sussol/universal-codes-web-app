@@ -92,25 +92,25 @@ a {
   text-decoration: none !important;
 }
 
-/* react table */
+/* react table overrides */
 .bp-table-container { box-shadow: none !important; background-color: #FFF; }
+.bp-table-quadrant-scroll-container { margin-left: 1px; }
 .bp-table-container:focus { outline: none; }
-.bp-table-body { overflow-y: scroll; overflow-x: hidden; }
 .bp-table-cell {
   padding: 15px 10px;
   box-shadow: 0 1px 0 rgb(224,224,224) inset !important;
   transition: .25s ease-in-out; /* looks nice on column resize */
 }
-.bp-table-column-headers .bp-table-header { box-shadow: none; transition: .25s ease-in-out; }
-.bp-table-header-content button { text-align: left !important; background-color: #FFF; }
-.bp-table-column-header-tr { box-shadow: 0 1px #182026; }
+.bp-table-column-headers .bp-table-header { transition: .25s ease-in-out; }
+.bp-table-header-content button { text-align: left !important; background-color: #FFF !important; }
 .bp-table-column-headers { box-shadow: none; background-color: #FFF; }
-.bp-table-column-headers .bp-table-header.bp-table-last-in-row { box-shadow: none; }
-.bp-table-resize-vertical .bp-table-resize-handle { left: -7px; }
+.bp-table-resize-guides .bp-table-vertical-guide { box-shadow: -3px 0 #f26532; }
+.bp-table-resize-vertical .bp-table-resize-handle { left: 2px; background-color: #f26532; }
 .bp-table-header-content button span { padding: 0 0 0 10px; }
 .bp-table-selection-region {
-  border: 1px solid #f26532;
-  background-color: rgba(242, 101, 50, 0.06);
+  border: none;
+  margin-top: 1px;
+  background-color: rgba(242, 101, 50, 0.25);
 }
 
 .header svg {
