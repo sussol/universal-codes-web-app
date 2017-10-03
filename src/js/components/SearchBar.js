@@ -9,9 +9,10 @@ import SearchIcon from 'material-ui/svg-icons/action/search';
 import { SEARCH_URL } from '../settings';
 import { debounce } from '../utils';
 
-const buildApiUrl = ({ searchTerm, startsWith }) => {
+const buildApiUrl = ({ searchTerm, startsWithSearch }) => {
   const baseSearchUrl = `${SEARCH_URL}${searchTerm.toLowerCase()}`;
-  if (startsWith === false || startsWith === undefined) {
+  // fail gracefully if state is somehow not set
+  if (startsWithSearch === false || startsWithSearch === undefined) {
     return `${baseSearchUrl}&fuzzy=true`;
   }
   return `${baseSearchUrl}&exact=false`;
@@ -46,7 +47,9 @@ export class SearchBar extends PureComponent {
   }
 
   /**
-  * onChangeUserSearchSetting toggles "exact" on/off when 'Exact search' is acted upon
+  * onChangeUserSearchSetting
+  *
+  * Toggles state "startsWithSearch" on/off when 'Name or code begins with' is checked/unchecked.
   *
   * @param {bool}    isChecked - is the input selected or not; default is 'false'
   * @returns {obj}   new state of object
@@ -84,10 +87,8 @@ export class SearchBar extends PureComponent {
     // percent-encode search term
     const encodeSearchTerm = encodeURIComponent(searchTerm.toLowerCase());
     // store new term for comparison
-    this.setState({ searchTerm: encodeSearchTerm });
+    this.setState({ searchTerm: encodeSearchTerm, fetchingResults: true });
 
-    // start spinner wheel
-    this.setState({ fetchingResults: true });
     // call API for results
     return fetch(buildApiUrl(this.state))
       .then(res => res.json())
@@ -145,7 +146,7 @@ export class SearchBar extends PureComponent {
           />
         </div>
 
-        {/* exact search */}
+        {/* starts-with search */}
         <Checkbox
           defaultChecked
           className="search__option"
@@ -170,3 +171,12 @@ SearchBar.propTypes = {
   onSearchChange: PropTypes.func.isRequired,
   onSearchClear: PropTypes.func,
 };
+
+// FOR TESTING ONLY
+export let TEST = { // eslint-disable-line import/no-mutable-exports, prefer-const
+  buildApiUrl: null,
+};
+
+if (process.NODE_ENV !== 'production') {
+  TEST.buildApiUrl = buildApiUrl;
+}
