@@ -23,6 +23,9 @@ import { Search } from './components/Search';
 import '../fonts/fonts.css';
 import '../css/custom.css';
 
+// load images into build directory
+import './favicons';
+
 // patch global Promise for older browsers; for using `import()`
 require('es6-promise').polyfill();
 
