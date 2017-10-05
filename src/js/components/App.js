@@ -5,7 +5,6 @@ import { Header } from './Header';
 
 export const App = props => (
   <div>
-    <Header {...props} />
 
     {/* show children components as we navigate */}
     {

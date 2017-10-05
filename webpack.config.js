@@ -83,6 +83,12 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(env),
     }),
   ],
+  resolve: {
+    alias: {
+      'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom'),
+      // 'react': path.resolve(__dirname, 'node_modules', 'react'),
+    },
+  },
   stats: {
     warnings: false,
   },

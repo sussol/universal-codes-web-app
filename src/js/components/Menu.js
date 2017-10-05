@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 // can use PureComponent here since given same props, state
 // the result is the same
@@ -15,16 +15,16 @@ export class Menu extends PureComponent {
         onRequestChange={open => this.props.drawerChange(open)}
       >
         <Link to="/">
-          <MenuItem onTouchTap={this.props.close} primaryText="Search" />
+          <MenuItem onClick={this.props.close} primaryText="Search" />
         </Link>
         <Link to="about">
-          <MenuItem onTouchTap={this.props.close} primaryText="About" />
+          <MenuItem onClick={this.props.close} primaryText="About" />
         </Link>
         <Link to="legend">
-          <MenuItem onTouchTap={this.props.close} primaryText="Legend" />
+          <MenuItem onClick={this.props.close} primaryText="Legend" />
         </Link>
         <Link to="api">
-          <MenuItem onTouchTap={this.props.close} primaryText="API" />
+          <MenuItem onClick={this.props.close} primaryText="API" />
         </Link>
       </Drawer>
     );
