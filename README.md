@@ -14,8 +14,8 @@ A front-end for displaying Universal Drug names and codes.
 ## Starting up the project for local development
 
 ```
-npm install
-npm start
+yarn install
+yarn start
 
 // open your browser to localhost:8080
 ```
@@ -23,7 +23,7 @@ npm start
 
 If you'd to run the project on a port other than `:8080`: 
 
-`WEBPACK_SERVER_PORT=[NEW_PORT] npm start`
+`WEBPACK_SERVER_PORT=[NEW_PORT] yarn start`
 
 📓 Local development uses:
 * [`react-hot-loader`](https://github.com/gaearon/react-hot-loader) ("Tweak React components in real time.")
@@ -48,7 +48,7 @@ git push --tags
 
 ## Testing
 
-`npm test`
+`yarn test`
 
 ## Contributing
 
