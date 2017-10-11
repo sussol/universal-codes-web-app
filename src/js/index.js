@@ -9,12 +9,11 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // load styles into bundle
 import 'normalize.css/normalize.css';
-import '@blueprintjs/core/dist/blueprint.css';
-import '@blueprintjs/table/dist/table.css';
-
 import { About, Api, Header, Legend, Search } from './components';
 
 // load styles into bundle
+import '../../node_modules/@blueprintjs/core/dist/blueprint.css';
+import '../../node_modules/@blueprintjs/table/dist/table.css';
 import '../fonts/fonts.css';
 import '../css/custom.css';
 
@@ -24,7 +23,7 @@ import './favicons';
 // patch global Promise for older browsers; for using `import()`
 require('es6-promise').polyfill();
 
-// Needed for onTouchTap, won't be required once official React version released.
+// Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
