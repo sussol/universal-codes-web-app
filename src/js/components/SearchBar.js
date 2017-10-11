@@ -6,7 +6,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 import TextField from 'material-ui/TextField';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 
-import { SEARCH_URL } from '../settings';
+import { DEBOUNCE_SEARCH_INTERVAL, SEARCH_URL } from '../settings';
 import { debounce } from '../utils';
 
 const buildApiUrl = ({ searchTerm, startsWithSearch }) => {
@@ -106,10 +106,11 @@ export class SearchBar extends PureComponent {
             <TextField
               floatingLabelStyle={{ color: 'rgb(242, 101, 50)' }}
               floatingLabelText="Search by generic name or code"
-              // accommodate slower typists
               onChange={
+                // accommodate slower typists
                 debounce(
-                  this.handleSearch.bind(this), 500, // eslint-disable-line react/jsx-no-bind
+                  this.handleSearch.bind(this), // eslint-disable-line react/jsx-no-bind
+                  DEBOUNCE_SEARCH_INTERVAL,
                 )
               }
               ref={(input) => { this.textField = input; }}
@@ -142,7 +143,7 @@ export class SearchBar extends PureComponent {
           <SearchIcon
             alt="search"
             className="icon-search"
-            color={'#CCC'}
+            color="#CCC"
           />
         </div>
 
@@ -150,9 +151,11 @@ export class SearchBar extends PureComponent {
         <Checkbox
           defaultChecked
           className="search__option"
-          iconStyle={{ fill: this.state.startsWithSearch ?
-            'rgba(242,101,50,1)' :
-            'rgba(248,170,142,1)',
+          iconStyle={{
+            fill:
+              this.state.startsWithSearch
+              ? 'rgba(242,101,50,1)'
+              : 'rgba(248,170,142,1)',
           }}
           label="Name or code begins with"
           labelStyle={{ color: '#777', marginLeft: '-12px' }}

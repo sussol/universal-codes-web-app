@@ -25,7 +25,8 @@ export const About = () => (
 
     <h2>How much?</h2>
     <p>It’s free.<br />
-    Please don’t abuse the service, or we will have to change this policy.</p>
+      Please don’t abuse the service, or we will have to change this policy.
+    </p>
 
     <h2>Contact?</h2>
     <p>

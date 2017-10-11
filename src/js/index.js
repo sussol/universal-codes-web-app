@@ -34,7 +34,7 @@ const renderApp = () => {
         <Router>
           <div>
             <Header />
-            <div className={'box-content mui-shadow'}>
+            <div className="box-content mui-shadow">
               <Route exact path="/" component={Search} />
               <Route exact path="/about" component={About} />
               <Route exact path="/api" component={Api} />

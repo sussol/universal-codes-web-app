@@ -14,6 +14,7 @@ export class Menu extends PureComponent {
         open={this.props.open}
         onRequestChange={open => this.props.drawerChange(open)}
       >
+        {/* eslint-disable jsx-a11y/anchor-is-valid */}
         <Link to="/">
           <MenuItem onClick={this.props.close} primaryText="Search" />
         </Link>
