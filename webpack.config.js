@@ -3,8 +3,8 @@
 /* eslint-disable prefer-template */
 const path = require('path');
 const webpack = require('webpack');
-const HotModuleReplacementPlugin = require('webpack').HotModuleReplacementPlugin;
-const CommonsChunkPlugin = require('webpack').optimize.CommonsChunkPlugin;
+const { HotModuleReplacementPlugin } = require('webpack');
+const { CommonsChunkPlugin } = require('webpack').optimize;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const env = process.env.NODE_ENV || 'development';
@@ -31,12 +31,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        // preloader
-        enforce: 'pre',
-        exclude: /node_modules/,
-        use: 'source-map-loader',
-      }, {
         // babel transpile
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -49,7 +43,7 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-            name: '[name].[ext]?[hash]',
+            name: '[name].[ext]?[hash:5]',
           },
         },
       },
