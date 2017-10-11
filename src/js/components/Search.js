@@ -94,7 +94,7 @@ export class Search extends PureComponent {
   *
   */
   renderLazyTable() {
-    return import('./ResultsTable').then((table) => {
+    return import(/* webpackChunkName: "results" */ './ResultsTable').then((table) => {
       this.resultsTableComponent = table.ResultsTable;
       this.setState({ loadedComponent: true });
     });
