@@ -2,8 +2,9 @@
   "presets": [
     // disable babel's module plugin
     // https://webpack.js.org/guides/hmr-react/#babel-config
-    ["es2015", {"modules": false}],
+    ["env", {"modules": false}],
 
+    "env",
     "react",
     "stage-0"
   ],
@@ -14,7 +15,7 @@
   "env": {
     "test": {
       // https://facebook.github.io/jest/docs/en/webpack.html#using-with-webpack-2
-      "plugins": ["transform-es2015-modules-commonjs", "dynamic-import-node"]
+      "plugins": ["dynamic-import-node"]
     }
   }
 }
