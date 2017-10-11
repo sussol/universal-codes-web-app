@@ -28,13 +28,6 @@ module.exports = {
     'react-hot-loader/patch', // activate HMR for React - needs to be 1st
     path.join(__dirname, 'src/js/index.js'), // our app entry
   ]),
-  // https://github.com/airbnb/enzyme/blob/master/docs/guides/webpack.md#react-15-compatibility
-  externals: {
-    'react/addons': true,
-    'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': true,
-    'react-addons-test-utils': 'react-dom',
-  },
   module: {
     rules: [
       {
@@ -63,6 +56,7 @@ module.exports = {
     ],
   },
   output: {
+    chunkFilename: '[name].js',
     path: path.join(__dirname, '/build'),
     filename: 'bundle.js',
   },
@@ -83,12 +77,6 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(env),
     }),
   ],
-  resolve: {
-    alias: {
-      'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom'),
-      // 'react': path.resolve(__dirname, 'node_modules', 'react'),
-    },
-  },
   stats: {
     warnings: false,
   },
