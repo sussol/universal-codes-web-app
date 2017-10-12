@@ -15,12 +15,9 @@ export class Search extends PureComponent {
         key: 'code',
         title: 'Code',
       }],
-      loadedComponent: false,
       resultsTableComponent: null,
       showResults: false,
     };
-
-    this.resultsTableComponent = null;
   }
 
   componentDidMount() {
@@ -94,14 +91,13 @@ export class Search extends PureComponent {
   *
   */
   renderLazyTable() {
-    return import('./ResultsTable').then((table) => {
-      this.resultsTableComponent = table.ResultsTable;
-      this.setState({ loadedComponent: true });
+    return import(/* webpackChunkName: "results" */ './ResultsTable').then((table) => {
+      this.setState({ resultsTableComponent: table.ResultsTable });
     });
   }
 
   render(props) {
-    const ResultsTable = this.resultsTableComponent;
+    const ResultsTable = this.state.resultsTableComponent;
 
     return (
       <div className="search-area">

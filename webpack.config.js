@@ -3,8 +3,8 @@
 /* eslint-disable prefer-template */
 const path = require('path');
 const webpack = require('webpack');
-const HotModuleReplacementPlugin = require('webpack').HotModuleReplacementPlugin;
-const CommonsChunkPlugin = require('webpack').optimize.CommonsChunkPlugin;
+const { HotModuleReplacementPlugin } = require('webpack');
+const { CommonsChunkPlugin } = require('webpack').optimize;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const env = process.env.NODE_ENV || 'development';
@@ -28,22 +28,9 @@ module.exports = {
     'react-hot-loader/patch', // activate HMR for React - needs to be 1st
     path.join(__dirname, 'src/js/index.js'), // our app entry
   ]),
-  // https://github.com/airbnb/enzyme/blob/master/docs/guides/webpack.md#react-15-compatibility
-  externals: {
-    'react/addons': true,
-    'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': true,
-    'react-addons-test-utils': 'react-dom',
-  },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        // preloader
-        enforce: 'pre',
-        exclude: /node_modules/,
-        use: 'source-map-loader',
-      }, {
         // babel transpile
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -56,13 +43,14 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-            name: '[name].[ext]?[hash]',
+            name: '[name].[ext]?[hash:5]',
           },
         },
       },
     ],
   },
   output: {
+    chunkFilename: '[name].js',
     path: path.join(__dirname, '/build'),
     filename: 'bundle.js',
   },

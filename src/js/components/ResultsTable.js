@@ -11,11 +11,6 @@ const userCopiedData = (row, col) => {
 };
 
 export class ResultsTable extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = { height: 0 };
-  }
-
   componentDidMount() {
     // get column widths we want to be fixed width
     const columnWidthData = this.props.columnWidthSettings;
@@ -36,10 +31,6 @@ export class ResultsTable extends PureComponent {
     ), 250);
     // start listening on window resize to change table height
     window.addEventListener('resize', this.tableHeightDebouncer);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ height: nextProps.height });
   }
 
   componentWillUnmount() {
