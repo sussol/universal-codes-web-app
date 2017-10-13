@@ -11,6 +11,7 @@ export class Search extends PureComponent {
       columns: [{
         key: 'name',
         title: 'Name',
+        sortable: true,
       }, {
         key: 'code',
         title: 'Code',
