@@ -52,7 +52,7 @@ module.exports = {
   output: {
     chunkFilename: '[name].js',
     path: path.join(__dirname, '/build'),
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
   plugins: [
     new CommonsChunkPlugin({
