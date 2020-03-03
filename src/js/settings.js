@@ -2,7 +2,7 @@
 const API_VERSION = process.env.API_VERSION || 'v1';
 const hostByEnv = (env = process.env.NODE_ENV) => {
   if (env === 'production') {
-    return `api.universalcodes.msupply.org.nz/${API_VERSION}`;
+    return `api-universalcodes.msupply.org/${API_VERSION}`;
   }
   return 'yadaiamy6e.execute-api.ap-southeast-2.amazonaws.com/dev';
 };
